@@ -1,0 +1,49 @@
+<script type="text/javascript">
+	function getAllSquaresByPoint(num){
+		var weiqiBoard=new Array(num)
+		,i=0
+		,j=0
+		totalCount=0;
+		//初始化数组
+		for(i=0;i<weiqiBoard.length;i++){
+			weiqiBoard[i]=new Array(num);
+			for(j=0;j<weiqiBoard[i].length;j++){
+				weiqiBoard[i][j]=0;
+			}
+		}
+		//计算长度
+		for(i=0;i<weiqiBoard.length;i++){
+			for(j=0;j<weiqiBoard[i].length;j++){
+				if(i>j){
+					weiqiBoard[i][j]=num-i;
+					totalCount+=num-i;
+				}else{
+					weiqiBoard[i][j]=num-j;
+					totalCount+=num-j;
+				}
+			}
+		}
+		console.log(totalCount);
+	}
+	getAllSquaresByPoint(19);
+	function getAllSquaresByWidth(num){
+		var weiqiBoard=new Array(num)
+		,i=0
+		,j=0
+		totalCount=0;
+		//初始化二位数组
+		for(i=0;i<weiqiBoard.length;i++){
+			weiqiBoard[i]=new Array(num);
+			for(j=0;j<weiqiBoard[i].length;j++){
+				weiqiBoard[i][j]=0;
+			}
+		}
+		//按边长计数
+		for(i=0;i<num;i++){
+			//长度为1时，num-i即为横向和纵向的
+			totalCount+=Math.pow(num-i,2);
+		}
+		console.log(totalCount);
+	}
+	getAllSquaresByWidth(19);
+</script>
