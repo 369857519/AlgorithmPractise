@@ -1,0 +1,73 @@
+<script type="text/javascript">
+	var arr=[5,2,3,-10,2,3];
+	//暴力破解法
+	function MaxSubArray(arr){
+		var sum=0,
+		i=0,
+		j=0,
+		z=0,
+		currentSum=0;
+		for(i=0;i<arr.length;i++){
+			for(j=i;j<arr.length;j++){
+				currentSum=0;
+				for(z=i;z<=j;z++){
+					currentSum+=arr[z];
+				}
+				if(sum<currentSum){
+					sum=currentSum;
+				}
+			}
+		}
+		console.log(sum);
+	}
+	//分治法
+	function max(a,b){
+		if(a>b){
+			return a;
+		}else{
+			return b;
+		}
+	}
+	function DACMaxSubArray(arr,from,to){
+		if(from==to){
+			return arr[from];
+		}
+		var mid=parseInt((to+from)/2,10),
+		i=0,j=0,midSum=0,
+		leftPart=0,
+		rightPart=0,
+		currentSum=0,
+		result;
+		//如果横跨中间的话，计算一下左边，在计算右边，然后相加
+		currentSum=arr[mid];
+		leftPart=arr[mid];
+		for(i=mid-1;i>=0;i--){
+			currentSum+=arr[i];
+			leftPart=max(currentSum,leftPart)
+		}
+		//
+		currentSum=arr[mid+1];
+		rightPart=arr[mid+1];
+		for(i=mid+2;i<to;i++){
+			currentSum+=arr[i];
+			rightPart=max(currentSum,rightPart);
+		}
+		midSum=leftPart+rightPart;
+		//在前半部分的情况
+		var leftSum=DACMaxSubArray(arr,from,mid);
+		var rightSum=DACMaxSubArray(arr,mid+1,to);
+		
+		if(midSum>leftPart){
+			result=midSum;
+		}else{
+			midSum=leftPart;
+		}
+		if(result>rightSum){
+			return result;
+		}else{
+			return rightSum;
+		}
+	}
+	MaxSubArray(arr);
+	console.log(DACMaxSubArray(arr,0,arr.length))
+</script>

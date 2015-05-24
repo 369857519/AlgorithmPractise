@@ -1,0 +1,34 @@
+<script type="text/javascript">
+	function getSubSequence(Arr,sum){
+		var i=0,j=0;
+		var arr=[56,2,33,4];
+		//先排序n*logn
+		QuickSort(arr,0,arr.length-1);
+		//确定位置
+		
+		
+	}
+	function QuickSort(arr,start,end){
+		if(start<end){
+			var i=start-1,j=end,pivot=arr[end],temp;
+			while(true){
+				while(arr[++i]<pivot){};
+				while(arr[--j]>pivot){};
+				if(i<j){
+					swap(arr,i,j);
+				}else{
+					break;
+				}
+			}
+			swap(arr,i,end);
+			QuickSort(arr,start,i-1);
+			QuickSort(arr,i+1,end);
+		}		
+	}
+	function swap(arr,p1,p2){
+		var temp=arr[p1];
+		arr[p1]=arr[p2];
+		arr[p2]=temp;
+	}
+	getSubSequence();
+</script>

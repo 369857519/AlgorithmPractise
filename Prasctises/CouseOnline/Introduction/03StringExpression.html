@@ -1,0 +1,58 @@
+<script type="text/javascript">
+	function reversePoland(str){
+		var stack=[],i=0,outputStr="";
+		//获取所有的
+		for(i=0;i<str.length;i++){
+			//如果遇到运算符就入栈
+			switch(str[i]){
+				case "+":
+					if(stack.length==0){
+						stack.push(str[i])
+					}else if(stack[stack.length-1]>str[i]){
+						stack.push(str[i]);
+					}else{
+						outputStr+=str[i];
+					}					
+					break;
+				case "*":
+					if(stack.length==0){
+						stack.push(str[i])
+					}else if(stack[stack.length-1]>str[i]){
+						stack.push(str[i]);
+					}else{
+						outputStr+=str[i];
+					}
+					break;
+				default:
+					outputStr+=str[i];
+					if(stack.length>1){
+						if(stack[stack.length-1]<stack[stack.length-2]){
+							outputStr+=stack.pop();
+						}
+					}
+			}
+		}
+		outputStr+=stack.pop();
+		console.log(outputStr);
+		return outputStr;
+	}
+	function caculate(str){
+		var stack=[],tempVar1,tempVar2;
+		for(var i=0;i<str.length;i++){
+			switch(str[i]){
+				case "+":
+					stack.push(parseInt(stack.pop(i-1),10)+parseInt(stack.pop(i-2),10));
+					break;
+				case "*":
+					stack.push(parseInt(stack.pop(i-1),10)*parseInt(stack.pop(i-2),10));
+					break;
+				default:
+					stack.push(str[i]);
+			}
+		}
+		console.log(stack);
+	}
+	var str=reversePoland("1+4*5+4*2");
+	caculate(str);
+	
+</script>
