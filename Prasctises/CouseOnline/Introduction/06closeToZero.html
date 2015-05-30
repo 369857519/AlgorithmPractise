@@ -1,0 +1,51 @@
+<script type="text/javascript">
+	function swap(arr,i,j){
+		var temp=arr[i];
+		arr[i]=arr[j];
+		arr[j]=temp;
+	}
+	function quickSort(arr,start,end){
+		if(start>=end){
+			return;
+		}
+		var	i=start-1,j=end,
+		pivot=arr[end];
+		while(true){
+			while(arr[++i]<pivot){};
+			while(arr[--j]>pivot){};
+			if(i<j){
+				swap(arr,i,j);
+			}else{
+				break;
+			}
+		}
+		swap(arr,i,end);
+		quickSort(arr,start,i-1);
+		quickSort(arr,i+1,end);
+	}
+	//先排序n*logn
+	
+
+	function closeToZero(arr){
+		// quickSort(arr,0,arr.length-1);
+		var prefixArr=[arr[0]],i=0,mostSmall;
+		for(i=1;i<arr.length;i++){
+			prefixArr[i]=prefixArr[i-1];
+			prefixArr[i]+=arr[i];
+		}
+		quickSort(prefixArr,0,prefixArr.length-1);
+		//计算最小子数组
+		mostSmall=prefixArr[prefixArr.length-1]-prefixArr[prefixArr.length-2];
+		for (var i = prefixArr.length - 1; i > 0; i--) {
+			var current=prefixArr[i]-prefixArr[i-1];
+			if(mostSmall>current){
+				mostSmall=current;
+			}
+		};
+		return mostSmall;
+	}	
+
+	var arr=[1,32,5,-1,20,-40,60,2];
+	console.log(closeToZero(arr));
+</script>
+

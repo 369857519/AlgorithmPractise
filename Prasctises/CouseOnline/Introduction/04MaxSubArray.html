@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	var arr=[5,2,3,-10,2,3];
+	var arr=[5,2,7,-20,20,40];
 	//暴力破解法
 	function MaxSubArray(arr){
 		var sum=0,
@@ -69,5 +69,38 @@
 		}
 	}
 	MaxSubArray(arr);
-	console.log(DACMaxSubArray(arr,0,arr.length))
+	console.log(DACMaxSubArray(arr,0,arr.length-1));
+	//分析法
+	function analyticsMaxSubArray(arr){
+		var prefixArr=[],sumArr=[],i=0,minSum;
+		//计算前缀数组
+		prefixArr[0]=arr[0];
+		for(i=1;i<arr.length;i++){
+			prefixArr[i]=prefixArr[i-1];
+			prefixArr[i]+=arr[i];
+		}
+		//动态计算最小数值
+		minSum=0;
+		maxSubArr=prefixArr[0];
+		for(i=1;i<prefixArr.length;i++){
+			if(minSum>prefixArr[i-1]){
+				minSum=prefixArr[i-1];
+			}
+			currentSum=prefixArr[i]-minSum;
+			if(maxSubArr<prefixArr[i]-minSum){
+				maxSubArr=prefixArr[i]-minSum;
+			}
+		}
+		return maxSubArr;
+	}
+	console.log(analyticsMaxSubArray(arr));
+	//动态规划
+	function DPmaxSubArray(arr){
+		var sum=[arr[0]];
+		for(var i=1;i<arr.length;i++){
+			sum[i]=max(sum[i-1]+arr[i],arr[i]);
+		}
+		return sum.pop();
+	}
+	console.log(DPmaxSubArray(arr))
 </script>

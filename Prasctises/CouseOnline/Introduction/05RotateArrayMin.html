@@ -1,0 +1,38 @@
+<script type="text/javascript">
+	var arr=[8,10,12,13,0,2,5,7];
+	function getMinRecursive(arr,start,end){
+		if(end-start==1){
+			return arr[start]>arr[end]?arr[end]:arr[start];
+		}
+		if(start==end){
+			return arr[start];
+		}
+		var mid=parseInt((start+end)/2);
+		var result=0;
+		if (arr[start]>arr[mid]) {
+			result=getMinRecursive(arr,start,mid);
+		}else{
+			//因为是寻找最小值，如果中间值正好是最大，分割后不能剔掉中间值，不然无法继续搜寻，而是用high比较的方法可以剔除中间值，并由中间值右边直接向左搜寻到最小值。分治法尾的处理非常有技巧型
+			result=getMinRecursive(arr,mid,end);
+		}
+		return result;
+	}
+	function getMin(arr){
+		var low=0,high=arr.length-1;
+		while(low<high){
+			mid=parseInt((low+high)/2,10);
+			if(arr[low]<arr[mid]){
+				low=mid;//在右半段
+			}else if(arr[low]>arr[mid]){
+				high=mid;//在作半段
+			}else{
+				return arr[low]>arr[high]?arr[high]:arr[low];
+			}
+		}
+		//只剩两个数字时，mid此时等于low,如果拿low去对比，需要额外的进行一次high的对比。而用high对比是恰巧可以处理掉最后一次对比，这里是一个巧合
+		return arr[low];
+	}
+	
+	console.log(getMinRecursive(arr,0,arr.length-1));
+	console.log(getMin(arr));
+</script>
