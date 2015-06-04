@@ -1,0 +1,65 @@
+<script type="text/javascript">
+	var arr=[5,2,3,4,5,5,4,3,2];
+	function getSingle(arr){
+		var temp=arr[0],i=0;
+		for(i=1;i<arr.length;i++){
+			temp=temp^arr[i];
+		}
+		console.log(temp);
+	}
+	// getSingle(arr);
+	//获取两个不同
+	var arrTowSingle=[1,3,4,5,6,7,7,9,6,5,4,3,2,1];
+	function getTwoSingle(arr){
+		//获取两个值得异或值
+		var temp=arr[0],i=0,binary1=0,str="",j=0,temp1=0,temp2=0;
+		for(i=0;i<arr.length;i++){
+			temp=temp^arr[i];
+		}
+		//取到二进制最低位不同的值,即temp为1的值
+		str=temp.toString(2);
+		for(i=str.length-1;i>=0;i--,j++){
+			if(str[i]==1){
+				break;
+			}
+		}
+		//再次异或
+		for(i=0;i<arr.length;i++){
+			str=arr[i].toString(2);
+			if(str[str.length-j-1]=="1"){
+				temp1=temp1^arr[i];
+			}else{
+				temp2=temp2^arr[i];
+			}
+		}
+		console.log(temp1);
+		console.log(temp2);
+	}
+	// getTwoSingle(arrTowSingle);
+
+	var arrThreeSingle=[2,2,2,5,5,5,8,9,8,9,8,9,6];
+	function getThreeSingle(arr){
+		var zero=~0;
+		var one=0;
+		var two=0;
+		for(var i=0;i<arr.length;i++){
+			var temp=zero&arr[i];//此时temp里就是arr[i] 10
+			zero^=temp;//zero中增加temp的位，zero也变成了arr[i] 10
+			var mask=temp;//10
+
+			temp=one&arr[i];//00
+			one^=temp;//01 加上一位
+			one|=mask;//10	抹掉一位
+
+			mask=temp;
+			temp=two&arr[i];
+			two^=temp;
+			two|=mask;
+
+			mask=temp;
+			zero |=mask;
+		}
+		return one;
+	}
+	console.log(getThreeSingle(arrThreeSingle));
+</script>

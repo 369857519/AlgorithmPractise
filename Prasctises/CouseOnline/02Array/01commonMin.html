@@ -1,0 +1,95 @@
+<script type="text/javascript">
+	var arr1=[19,2,3,-19,49,0,11];
+	var arr2=[19,11,99,49,25,11];
+	function swap(arr,i,j){
+		var temp=arr[i];
+		arr[i]=arr[j];
+		arr[j]=temp;
+	}
+
+	function swapMiddle(arr,i,q){
+		var j=parseInt((i+q)/2,10);
+		if(arr[i]>arr[j]){
+			if(arr[i]>arr[q]){
+				if(arr[j]>arr[q]){
+					//arr[j]在中间
+					swap(arr,j,q);
+				}
+			}else{
+				//arr[i]在中间
+				swap(arr,i,q);
+			}
+		}else{//arr[j]>arr[j]
+			if(arr[j]>arr[q]){
+				if(arr[i]>arr[q]){
+					//arr[i]在中间
+					swap(arr,i,q);
+				}
+			}else{
+				//arr[j]在中间
+				swap(arr,j,q);
+			}
+		}
+	}
+
+	function QuickSort(arr,start,end){
+		if(start>=end){
+			return arr[start];
+		}
+		var i=start-1,j=end;
+		swapMiddle(arr,start,end);
+		while(true){
+			while(arr[++i]<arr[end]){};
+			while(arr[--j]>arr[end]){};
+			if(i<j){
+				swap(arr,i,j);
+			}else{
+				break;
+			}
+		}
+		swap(arr,i,end);
+		QuickSort(arr,start,i-1);
+		QuickSort(arr,i+1,end);
+	}
+	// QuickSort(arr,0,arr.length-1);
+	function getCommonMin(arr1,arr2){
+		QuickSort(arr1,0,arr1.length-1);
+		QuickSort(arr2,0,arr2.length-1);
+		var i=0;j=0;
+		for(i=0,j=0;i<arr1.length-1&&j<arr2.length-1;){
+			if(arr1[i]==arr2[j]){
+				return arr1[i];
+			}else if(arr1[i]<arr2[j]){
+				i++;
+			}else if(arr1[i]>arr2[j]){
+				j++;
+			}
+		}
+	}
+
+	//方法二，建立哈希
+	function getCommonMinMap(arr1,arr2){
+		var map1=[],i=0,j=0,best=Infinity;
+		for(i=0;i<arr1.length-1;i++){
+			map1[arr1[i]]=1;
+		}
+		// for(i=0;i<arr2.length-1;i++){
+		// 	map1[arr2[i]]+=1;
+		// }
+		// for(i=0;i<map1.length-1;i++){
+		// 	if (map1[i]>1){
+		// 		return i;
+		// 	}
+		// }
+		for(i=0;i<arr2.length-1;i++){
+			if(map1[arr2[i]]==1){
+				if(best>arr2[i]){
+					best=arr2[i];
+				}
+			}
+		}
+		return best;
+	}
+	console.log(getCommonMin(arr1,arr2));
+	console.log(getCommonMinMap(arr1,arr2));
+</script>

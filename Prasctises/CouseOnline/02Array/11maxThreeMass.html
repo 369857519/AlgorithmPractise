@@ -1,0 +1,34 @@
+<script type="text/javascript">
+	var arr=[1,2,3,-10,20,66,-20,-100];
+
+	function swap(arr,i,j){
+		var temp=arr[i];
+		arr[i]=arr[j];
+		arr[j]=temp;
+	}
+	function quickSort(arr,start,end){
+		if(start>=end){
+			return start[i];
+		}
+		var i=start-1,j=end;
+		while(true){
+			while(arr[++i]<arr[end]){};
+			while(arr[--j]>arr[end]){};
+			if(i<j){
+				swap(arr,i,j);
+			}else{
+				break;
+			}
+		}
+		swap(arr,i,end);
+		quickSort(arr,start,i-1);
+		quickSort(arr,i+1,end);
+	}
+
+	function max(arr){
+		//三个正数和两个负数一个正数
+		quickSort(arr,0,arr.length-1);
+		return Math.max(arr[0]*arr[1]*arr[arr.length-1],arr[arr.length-1]*arr[arr.length-2]*arr[arr.length-3]);
+	}
+	console.log(max(arr));
+</script>

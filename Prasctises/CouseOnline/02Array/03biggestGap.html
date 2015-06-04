@@ -1,0 +1,50 @@
+<script type="text/javascript">
+	var arr=[20,2,80,10,55,79];
+	function biggestGap(arr){
+		var i,min=arr[0],max=arr[0],gap,bucketMax=new Array(arr.length+1),bucketMin=new Array(arr.length+1),count=0;
+		for(i=0;i<arr.length;i++){
+			if(max<arr[i]){
+				max=arr[i];
+			}
+			if(min>arr[i]){
+				min=arr[i]
+			}
+			//
+		}
+		console.log(gap=(max-min)/(arr.length+1));
+		//初始化
+		bucketMax[arr.length]=max;
+		bucketMin[arr.length]=max;
+		for(i=0;i<arr.length;i++){
+			if(arr[i]==max){continue;}
+			//将最大的数放到最后一个桶中
+			count=parseInt((arr[i]-min)*(arr.length+1)/(max-min),10);
+			//赋值最大值
+			if(bucketMax[count]==undefined){
+				bucketMax[count]=arr[i];
+			}else if(bucketMax[count]<arr[i]){
+				bucketMax[count]=arr[i];
+			}
+			//赋值最小值
+			if(bucketMin[count]==undefined){
+				bucketMin[count]=arr[i];
+			}else if(bucketMin[count]>arr[i]){
+				bucketMin[count]=arr[i];
+			}
+		}
+		//开始计算桶
+		var currentMax=bucketMax[0];
+		var result=0;
+		for(i=1;i<=arr.length;i++){
+			if(bucketMin[i]!=undefined){
+				//最大间隙为，下一个桶中的最小值减去现在桶中的最大值
+				if(result<bucketMin[i]-currentMax){
+					result=bucketMin[i]-currentMax;
+				}
+				currentMax=bucketMax[i];
+			}
+		}
+		console.log(result);
+	}
+	biggestGap(arr);
+</script>

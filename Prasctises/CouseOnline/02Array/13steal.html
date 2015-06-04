@@ -1,0 +1,13 @@
+<script type="text/javascript">
+	arr=[1,0,3,4,5];
+	function steal(arr){
+		var i=0,best1=0,best0=0;
+		for(i=0;i<arr.length;i++){
+			var temp=best1+arr[i];
+			best1=best0;//拿下一个的序列等于不拿这个，不拿这个的话即为best0
+			best0=Math.max(best0,temp);//不拿下一个的序列等于，拿这个和不拿这个两个序列求最大值
+		}
+		return Math.max(best0,best1);
+	}
+	console.log(steal(arr));
+</script>

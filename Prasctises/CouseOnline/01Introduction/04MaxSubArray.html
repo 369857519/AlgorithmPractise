@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	var arr=[5,2,7,-20,20,40];
+	var arr=[1,4,6,-20,3,6];
 	//暴力破解法
 	function MaxSubArray(arr){
 		var sum=0,
@@ -97,10 +97,12 @@
 	//动态规划
 	function DPmaxSubArray(arr){
 		var sum=[arr[0]];
+		var answer=arr[0];
 		for(var i=1;i<arr.length;i++){
 			sum[i]=max(sum[i-1]+arr[i],arr[i]);
+			answer=max(sum[i],answer);
 		}
-		return sum.pop();
+		return answer;
 	}
 	console.log(DPmaxSubArray(arr))
 </script>
