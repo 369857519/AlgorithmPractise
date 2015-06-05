@@ -1,0 +1,30 @@
+<script type="text/javascript">
+	function Node(value,nextNode){
+		this.val=value;
+		this.next=nextNode;
+	}
+	var dummy=new Node();
+	var head=dummy;
+	var arr=[13,22,32,4,5,6];
+	for(var i=0;i<arr.length;i++){
+		dummy.next=new Node(arr[i]);
+		dummy=dummy.next;
+	}
+	function partition(head,num){
+		var h1=new Node(),h2=new Node(),h1Dummy=h1,h2Dummy=h2;
+		for(var cur=head.next;cur!=undefined;cur=cur.next){
+			if(cur.val<num){
+				h1.next=cur;
+				h1=cur;
+			}else{
+				h2.next=cur;
+				h2=cur;
+			}
+		}
+		h1.next=h2Dummy.next;
+		h2.next=undefined;
+
+		return h1Dummy.next;
+	}
+	console.log(partition(head,20));
+</script>

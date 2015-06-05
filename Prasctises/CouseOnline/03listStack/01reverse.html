@@ -1,0 +1,35 @@
+<script type="text/javascript">
+	function Node(value,nextNode){
+		this.val=value;
+		this.next=nextNode;
+	}
+
+	var listOne=new Node(2);
+	listOne.next=new Node(4);
+	listOne.next.next=new Node(5);
+
+	var listTwo=new Node(5);
+	listTwo.next=new Node(6);
+	listTwo.next.next=new Node(4);
+	
+	function addTwoNumbers(listOne,listTwo){
+		var head=new Node();
+		var carry=0,value=0;
+		var prev=head;
+		for(;listOne!=undefined||listTwo!=undefined;
+			listOne=listOne?listOne.next:undefined,
+			listTwo=listTwo?listTwo.next:undefined,
+			prev=prev.next){
+			var ai=listOne?listOne.val:0;
+			var bi=listTwo?listTwo.val:0;
+			value=(ai+bi+carry)%10;
+			carry=Math.floor((ai+bi+carry)/10);
+			prev.next=new Node(value);
+		}
+		if(carry>0){
+			prev.next=new Node(carry);
+		}
+		return head.next;
+	}
+	addTwoNumbers(listOne,listTwo);
+</script>
