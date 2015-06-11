@@ -1,0 +1,44 @@
+<script type="text/javascript">
+	function Node(value,nextNode){
+		this.val=value;
+		this.next=nextNode;
+	}
+	var head=new Node();
+	var prev=head;
+	var arr=[1,2,3,4,5,6,1,4];
+	for(var i=0;i<arr.length;i++){
+		head.next=new Node(arr[i]);
+		head=head.next;
+	}
+
+	function deleteNode(head,cur){
+		for(head=head.next;head;head=head.next){
+			if(head.next==cur){
+				head.next=cur.next;
+				cur=null;
+				return true;
+			}
+		}
+	}
+
+	function deleteDuplicate(list){
+		var head=list,cur={},prev={};
+		for(cur=head.next,prev=cur.next;cur;){
+			if(prev&&cur.val==prev.val){
+				var temp=prev;
+				prev=prev.next;
+				deleteNode(list,temp);
+			}else{
+				if(prev==undefined){
+					cur=cur.next;
+					prev=cur?cur.next:undefined;
+				}else{
+					prev=prev.next;
+				}
+			}
+		}
+		return head;
+	}
+
+	console.log(deleteDuplicate(prev));
+</script>

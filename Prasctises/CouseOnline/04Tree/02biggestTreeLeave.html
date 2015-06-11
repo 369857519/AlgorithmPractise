@@ -1,0 +1,28 @@
+<script type="text/javascript">
+	var con=[[],[0,2,3],[0,1,5,4],[0,1],[0,2],[0,2]];
+	function getNodes(con){
+		var stk=[],maxDeep=0;
+		function dfs(x,f,deep){
+			for(var i=1;i<con[x].length;i++){
+				var y=con[x][i];
+				if(y&&y!=f){
+					dfs(y,x,deep+1);
+					if(deep>maxDeep){
+						maxDeep=deep;
+						stk.length=0;
+						stk.push(y);
+					}else if(deep==maxDeep){
+						stk.push(y);
+					}
+				}
+			}
+		}
+		maxDeep=0;
+		dfs(1,-1,0);
+		maxDeep=0;
+		var result=stk.slice();
+		dfs(stk[0],-1,0);
+		result=result.concat(stk);
+		console.log(result);
+	}
+</script>

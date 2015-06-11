@@ -1,0 +1,37 @@
+<script type="text/javascript">
+	var str='123-4*+';
+	function RPN(str){
+		var stk=[];
+		for(var i=0;i<str.length;i++){
+			if(isCaculator(str[i])){
+				var b=parseInt(stk.pop(),10);
+				var a=parseInt(stk.pop(),10);
+				switch(str[i]){
+					case "+":
+						stk.push(a+b);
+						break;
+					case "-":
+						stk.push(a-b);
+						break;
+					case "*":
+						stk.push(a*b);
+						break;
+					case "/":
+						stk.push(a/b);
+						break;
+					default:
+						break;
+				}
+			}else{
+				stk.push(str[i])
+			}
+		}
+		return stk[stk.length-1];
+		
+	}
+	function isCaculator(char){
+		var str="+-*/";
+		return str.indexOf(char)!=-1;
+	}
+	console.log(RPN(str));
+</script>

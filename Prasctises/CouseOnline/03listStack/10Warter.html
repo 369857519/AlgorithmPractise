@@ -1,0 +1,19 @@
+<script type="text/javascript">
+	var arr=[0,1,0,2,1,0,1,3,2,1,2,1];
+	function getWater(arr){
+		var left=0,right=arr.length-1,temp=0,volum=0;
+		while(left<right){
+			if(arr[left]<arr[right]){//这里是<号而不是>号是因为只有小的能做边际乘水，如果放大的，就会溢出
+				temp=Math.max(arr[left],temp);
+				volum+=temp-arr[left];
+				left++;
+			}else{
+				temp=Math.max(arr[right],temp);
+				volum+=temp-arr[right];
+				right--;
+			}
+		}
+		return volum;
+	}
+	console.log(getWater(arr));
+</script>

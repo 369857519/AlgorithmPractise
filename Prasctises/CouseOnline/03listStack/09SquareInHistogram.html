@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	
+	var arr=[1,7];
+
+	function square(arr){
+		var stk=[],answer=0,i=0;
+		arr.push(0);
+		for(i=0;i<arr.length;){
+			if(stk.length==0||arr[i]>arr[stk[stk.length-1]]){
+				stk.push(i);
+				i++
+			}else{
+				//高度arr[temp]
+				//宽度stk
+				var temp=stk.pop();
+				answer=Math.max(answer,arr[temp]*(stk.length>0?i-stk[stk.length-1]-1:1))
+			}
+		}
+		return answer;
+	}
+	// square(arr);
+</script>

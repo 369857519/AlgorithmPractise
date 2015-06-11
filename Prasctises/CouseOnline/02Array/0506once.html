@@ -44,12 +44,12 @@
 		var two=0;
 		for(var i=0;i<arr.length;i++){
 			var temp=zero&arr[i];//此时temp里就是arr[i] 10
-			zero^=temp;//zero中增加temp的位，zero也变成了arr[i] 10
+			zero^=temp;//删掉已经存在的位
 			var mask=temp;//10
 
 			temp=one&arr[i];//00
-			one^=temp;//01 加上一位
-			one|=mask;//10	抹掉一位
+			one^=temp;//删掉x
+			one|=mask;//加入
 
 			mask=temp;
 			temp=two&arr[i];
