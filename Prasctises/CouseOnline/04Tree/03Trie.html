@@ -1,0 +1,57 @@
+<script type="text/javascript">
+	function TrieNode(){
+		this.next=new Array(26);
+		this.have=false;
+		for(var i=0;i<26;i++){
+			this.next[i]=0;
+		}
+	}
+
+	var Tree={
+		root:new TrieNode(),
+		insert:function(s){
+			var now=this.root;
+			for(var i=0;i<s.length;i++){
+				var c=s.charCodeAt(i)-97;
+				if(now.next[c]==0){
+					now.next[c]=new TrieNode();
+				}
+				now=now.next[c];
+			}
+			now.have=true;
+			return this.root;
+		},
+		search:function(s){
+			var now=this.root;
+			for(var i=0;i<s.length;i++){
+				var c=s.charCodeAt(i)-97;
+				if(now.next[c]!=0){
+					now=now.next[c];
+				}else{
+					return false;
+				}
+			}
+			//因为每一次都是拿now的next进行比较，所以需要比较最后一个节点是否have
+			return now&&now.have;
+		},
+		startWith:function(token){
+			var now=this.root;
+			for(var i=0;i<token.length;i++){
+				var c=token.charCodeAt(i)-97;
+				if(now.next[c]==0){
+					return false;
+				}
+				now=now.next[c];
+			}
+			return now;
+		}
+	}
+
+	Tree.insert('name');
+	Tree.insert('cut');
+	console.log(Tree.root);
+	console.log(Tree.search('name'));
+	console.log(Tree.search('names'));
+	console.log(Tree.startWith('cc'));
+	console.log(Tree.startWith('nam'));
+</script>
