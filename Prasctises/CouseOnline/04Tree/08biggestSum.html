@@ -1,0 +1,59 @@
+<script type="text/javascript">
+	//10
+	//20  30
+	//5 20  25  null
+	var arr=[10,20,30,5,20,25,null];
+	function treeNode(val,left,right){
+		this.val=val;
+		this.left=left;
+		this.right=right;
+	}
+	function buildTree(arr,i){
+		if(arr[i]==undefined){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+	function getMax(){
+		var root=buildTree(arr,0);//构建树
+		var max=root.val,sum=0;//记录max
+		var leaf=null;
+		console.log(helper(root,sum),leaf);//得到最大的值
+		function helper(node,sum){
+			if(node==null){
+				return sum;
+			}else{
+				sum+=node.val;
+			}
+			if(sum>max){
+				max=sum;
+				leaf=node;
+			}
+			return Math.max(helper(node.left,sum),helper(node.right,sum));
+		}
+		var path=[];
+		function getPath(root,leaf){
+			if(root==null){
+				return false;
+			}
+			path.push(root.val);
+			if(root==leaf){
+				return true;
+			}
+			if(getPath(root.right,leaf)){
+				return true;
+			}
+			if(getPath(root.left,leaf)){
+				return true;
+			}
+			path.pop();
+			return false;
+		}
+		getPath(root,leaf);
+		console.log(path);
+	}
+	getMax();
+</script>

@@ -1,0 +1,35 @@
+<script type="text/javascript">
+	var postOrder="efbghca";//post
+	var inOrder="ebfagch";//in
+
+	// a
+	// b c
+	// ef gh
+	function Treenode(val,left,right){
+		this.val=val;
+		this.left=left;
+		this.right=right;
+	}
+
+	function buildTree(inOrder,postOrder,fromI,endI,fromP){
+		if(fromI==endI){
+			return new Treenode(inOrder[fromI]);
+		};
+		// if(fromI>endI){
+		// 	return null;
+		// }
+		var node=new Treenode();
+		node.val=postOrder[fromP];
+		var i=0;
+		while(inOrder[i]!=node.val){
+			i++;
+		}
+		var rights=fromP-1;
+		var lefts=rights-(i-fromI);
+		node.left=buildTree(inOrder,postOrder,fromI,i-1,lefts);
+		node.right=buildTree(inOrder,postOrder,i+1,endI,rights);
+		return node;
+	}
+
+	console.log(buildTree(inOrder,postOrder,0,inOrder.length-1,inOrder.length-1))
+</script>

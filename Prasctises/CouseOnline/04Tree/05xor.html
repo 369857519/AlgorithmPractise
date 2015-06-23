@@ -1,0 +1,44 @@
+<script type="text/javascript">
+	var arr=[1,2,3,4,5];
+
+	function treeNode(){
+		this.next=new Array(2);
+		this.have=false;
+	}
+	var Tree={
+		root:new treeNode(),
+		insert:function(str){
+			var now=this.root;
+			for(var i=0;i<str;i++){
+				num=parseInt(str[i],10);
+				now.next[num]=new treeNode();
+				now.have=true;
+				now=now.next[num];
+			}
+			now.have=true;
+		},
+		startWith:function(str){
+			var now=this.root;
+			for(var i=0;i<str;i++){
+				num=parseInt(str[i],10);
+				if(this.next[num]==0){
+					return false;
+				}
+				now=now.next[num];
+			}
+			return now;
+		}
+	}
+
+	function getBiggest(arr){
+		for(var i=0;i<arr.length;i++){
+			//先左移一位，再右移一位，对于每个数，当作31bit长的数值。
+			var inverse=(~arr[i]>>>0).toString(2);
+			// Tree.insert(inverse);
+			console.log(arr[i].toString(2));
+			console.log((arr[i]>>>0).toString(2));
+			console.log(inverse,inverse.length);
+		}
+	}
+	getBiggest(arr);
+</script>

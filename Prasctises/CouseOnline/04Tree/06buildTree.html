@@ -1,0 +1,30 @@
+<script type="text/javascript">
+	var strF='abdcef';
+	var strM='bdaecf';
+	function treeNode(left,right,val){
+		this.left=left;
+		this.right=right;
+		this.val=val;
+	}
+	function buildTree(strF,strM,fromM,toM,leftS){
+		if(fromM==toM){
+			return new treeNode(null,null,strF[leftS]);
+		}
+		if(fromM>toM){
+			return null;
+		}
+		var node=new treeNode(null,null,strF[leftS]);
+		var i=fromM;
+		while(strM[i]!=node.val){
+			i++;
+		}
+		//计算先跟遍历的字序列
+		leftS=leftS+1;
+		var rightS=leftS+i-fromM;
+		node.left=buildTree(strF,strM,fromM,i-1,leftS);
+		node.right=buildTree(strF,strM,i+1,toM,rightS);
+		return node;
+	}
+	var root;
+	// var root=buildTree(strM,strF,0,strM.length-1,0);
+</script>

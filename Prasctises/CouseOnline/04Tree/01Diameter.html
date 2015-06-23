@@ -23,26 +23,29 @@
 		dfs(1,0);
 		return diameter;
 	}
-var con=[[],[0,2,3],[0,1,5,4],[0,1],[0,2],[0,2]];
-	function getDiameterM2(con){
-		var distance=[],farest1=0,node=0;
-		function dfs(x,f,deep){
-			for(var i=1;i<con[x].length;i++){
-				var y=con[x][i];
-				if(y&&y!=f){
-					if(deep>farest1){
-						farest1=deep;
-						node=y;
+	function test(){
+		var con=[[],[0,2,3],[0,1,5,4],[0,1],[0,2],[0,2]];
+		function getDiameterM2(con){
+			var distance=[],farest1=0,node=0;
+			function dfs(x,f,deep){
+				for(var i=1;i<con[x].length;i++){
+					var y=con[x][i];
+					if(y&&y!=f){
+						if(deep>farest1){
+							farest1=deep;
+							node=y;
+						}
+						dfs(y,x,deep+1);
 					}
-					dfs(y,x,deep+1);
 				}
 			}
+			farest1=0;
+			dfs(1,-1,1);
+			farest1=0;
+			dfs(node,-1,1);
+			console.log(farest1);
 		}
-		farest1=0;
-		dfs(1,-1,1);
-		farest1=0;
-		dfs(node,-1,1);
-		console.log(farest1);
+		getDiameterM2(con);
 	}
-	getDiameterM2(con);
+	test();
 </script>
