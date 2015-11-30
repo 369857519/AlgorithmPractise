@@ -1,0 +1,106 @@
+<body>
+	<ul class="hehe">
+		<li class="haha"></li>
+	</ul>
+</body>
+<script type="text/javascript">
+ 	function treeNode(val){
+		this.val=val;
+		this.left=this.right=null;
+	}
+	//       10
+	//	 1 		13
+	//null  9  12  15
+	//first:false last:1
+	//	2   
+	// var arr=[87,84,94,79,null,null,null,77,null,-82,null,70,null,38,null,36,45,22,null,null,null,18,24,14,null,null,null,8,null,-93,null,6,null,-37,null,-21,4,-32,null,null,null,-15,null,-42,null,-63,null,-70,null,-78,null,75,null,7,null,-96,null,-98];
+	//		3
+	//	1        5
+	//0    2   4   6
+	//N N N  3
+
+	// var arr=[3,1,5,0,2,4,6,null,null,null];
+	var arr=[0,-1];
+	function buildTree(arr,i){
+		if(arr[i]==null){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+	var root=buildTree(arr,0);
+	// var isValidBSTFlag=true;
+	// function isValidBST(root){
+	// 	if(root.val==null||root==null){
+	// 		return true;
+	// 	}
+	// 	helper(root);
+	// 	return isValidBSTFlag;
+	// }
+	// function helper(root,isLeft){
+	// 	var left,right;
+	// 	if(!root.left&&!root.right){
+	// 		return {
+	// 			b:root.val,
+	// 			s:root.val
+	// 		};
+	// 	}else if(root.left&&root.right){
+	// 		left=helper(root.left);
+	// 		right=helper(root.right);
+	// 		if(left.b>=root.val||right.s<=root.val){
+	// 			isValidBSTFlag=false;
+	// 		}
+	// 		return {
+	// 			b:right.b,
+	// 			s:left.s
+	// 		}
+	// 	}else if(root.right){
+	// 		right=helper(root.right);
+	// 		if(right.s<=root.val){
+	// 			isValidBSTFlag=false;
+	// 		}
+	// 		return {
+	// 			b:right.b,
+	// 			s:root.val
+	// 		}
+	// 	}else{
+	// 		left=helper(root.left);
+	// 		if(left.b>=root.val){
+	// 			isValidBSTFlag=false;
+	// 		}
+	// 		return {
+	// 			b:root.val,
+	// 			s:left.s
+	// 		}
+	// 	}
+	// }
+	function isValidBST(root){
+		return helper2(root);
+	}
+    var first=true,val=0;
+    function helper2(root){
+		if(root==null){
+			return true;
+		}
+		if(!helper2(root.left)){
+			return false;
+		}
+		if(first){
+			first=false;
+			val=root.val;
+		}else if(val>=root.val){
+			return false;
+		}
+		val=root.val;
+		return helper2(root.right);
+	}
+	// console.log(isValidBST(root));
+	// console.log(isValidBST(root));
+
+	var c="var dirs=require('./fontProjConfig');var projectDir =require('./fdsa./fdsafdsa') dirs.projectDir;var targetDir = dirs.outputDir;"
+	console.log(c.match(/require\(([^\(\)]*)\)/g))
+	var domEle=document.getElementsByClassName('hehe')[0];
+	console.log();
+</script>

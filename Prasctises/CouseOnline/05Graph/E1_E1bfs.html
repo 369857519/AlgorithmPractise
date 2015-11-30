@@ -1,0 +1,81 @@
+<script type="text/javascript">
+	function UndirectedGraphNode(label){
+		this.label=label;
+		this.neighbors=[];
+	}
+
+	var node1=new UndirectedGraphNode(0);
+	var node2=new UndirectedGraphNode(1);
+	var node3=new UndirectedGraphNode(2);
+	node2.neighbors=[node2];
+	node3.neighbors=[node3];
+
+	var DFSMark=0,stk=[];
+	var DFS=function(graph){
+		DFSMark=DFSMark?0:1;
+		graph.read=DFSMark;
+		stk=[graph];
+		while(stk.length!=0){
+			graph=stk[stk.length-1];
+			if(graph.label==8){
+				console.log(stk);
+				break;
+			}
+			var hasChild=false;
+			for(var i=0;i<graph.neighbors.length;i++){
+				if(graph.neighbors[i].read!=DFSMark){
+					stk.push(graph.neighbors[i]);
+					graph.neighbors[i].read=DFSMark;
+					hasChild=true;
+					break;
+				}
+			}
+			if(!hasChild){
+				stk.pop();
+			}
+		}
+
+	}
+	var map={};
+	function DFSHelper(graph){
+		console.log(graph.label);
+		if(map[graph.label]==null){
+			var newNode=new UndirectedGraphNode(graph.label);
+			map[newNode.label]=newNode;
+			for(var i=0;i<graph.neighbors.length;i++){
+				newNode.neighbors.push(DFSHelper(graph.neighbors[i]));
+			}
+			return newNode;
+		}else{
+			return map[graph.label];
+		}
+	}
+
+
+	var mark=0;
+	var bfsMap={};
+	var BFSIterator=function(graph){
+		var queue=[graph];
+		bfsMap[graph.label]=new UndirectedGraphNode(graph.label);
+		while(queue.length!=0){
+			var length=queue.length;
+			for(var i=0;i<length;i++){
+				var currentNode=queue.shift();
+				for(var j=0;j<currentNode.neighbors.length;j++){
+					//是否包含
+					if(bfsMap[currentNode.neighbors[j].label]==null){
+						queue.push(currentNode.neighbors[j]);
+						//给neighbors增添节点
+						var newNode=new UndirectedGraphNode(currentNode.neighbors[j].label)
+						bfsMap[currentNode.label].neighbors.push(newNode);
+						bfsMap[currentNode.neighbors[j].label]=newNode
+					}else{
+						//
+						bfsMap[currentNode.label].neighbors.push(bfsMap[currentNode.neighbors[j].label]);
+					}
+				}
+			}
+		}
+		return bfsMap[graph.label];
+	}
+</script>

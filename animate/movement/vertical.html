@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>stars</title>
+	<meta name="viewport"
+          content="width=320,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
+    <script src="ball.js"></script>
+</head>
+<body>
+<canvas id="cocoCanvas" width="400" height="400" style="background:#000"></canvas>
+<script>
+	var createAnimate=function(){
+		var cocoCanvas=document.getElementById('cocoCanvas'),
+		context=cocoCanvas.getContext('2d'),
+		ball=new Ball(),
+		angle=0,
+		centerScale=0.1,
+		initOpacity=2,
+		range=3,
+		speed=0.02;
+		ball.x=cocoCanvas.width/2;
+		ball.y=cocoCanvas.height/2;
+		(function drawFrame(){
+			window.requestAnimationFrame(drawFrame,cocoCanvas)
+			context.clearRect(0,0,cocoCanvas.width,cocoCanvas.height);
+			ball.scaleX=centerScale+Math.sin(angle)*range;
+			ball.scaleY=centerScale+Math.sin(angle)*range;
+			ball.opacity=initOpacity-Math.sin(angle)*2
+			if(angle<Math.PI/2){
+				angle+=speed;
+			}else{
+				// createAnimate();
+				return false;
+			}
+			ball.draw(context);
+		})();
+	}
+	window.addEventListener('DOMContentLoaded',function(){
+		setInterval(createAnimate,1500);
+		createAnimate();
+	})
+
+</script>
+</body>
+</html>

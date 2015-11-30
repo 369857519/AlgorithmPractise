@@ -1,0 +1,57 @@
+<script type="text/javascript">
+	var disArr={1:{
+			2:7,
+			3:9,
+			6:14
+		},2:{
+			1:7,
+			3:10,
+			4:15
+		},3:{
+			1:9,
+			2:10,
+			4:11,
+			6:2,
+		},4:{
+			2:15,
+			3:11,
+			5:6,
+		},5:{
+			4: 6,
+			6:9 
+		},6:{
+			5:9,
+			1:14,
+			3:2
+		}
+	}
+	function dijkstra(n){
+		var mark=[];
+		var d=[];
+		for(var i=1;i<=n;i++){
+			d[i]=Infinity;
+		}
+		d[1]=0;
+		for(var i=1;i<=n;i++){//这里的n次可以做成无穷次，然后我们找到自己想找的节点的时候break即可，n次的含义只是为了让遍历全部完成
+			var k=-1;
+			//找到距离最小的点
+			for(var j=1;j<n;j++){
+				//这里通过比较获得距离最小的点
+				if(!mark[j]&&((k<0)||(d[k]>d[j])))k=j;
+			}
+			//更新距离最小的点周围的点
+			if(k==-1){
+				return d;
+			}
+			mark[k]=true;
+			for(var z=1;z<=n;z++){
+				//这里实际上是用循环来模表示bfs
+				//所以这个条件可以加一个如果
+				if(!mark[z]&&disArr[k][z]){
+					d[z]=Math.min(d[z],d[k]+disArr[z][k]);
+				}
+			}
+		}
+		return d;
+	}
+</script>

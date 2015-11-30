@@ -1,0 +1,21 @@
+<script type="text/javascript">
+	var list=[1,2,[3,4,5],[3,[4,5,1]]];
+
+	function calculagte(arr){
+		var deep=1;
+		console.log(helper(arr,deep));
+	}
+
+	function helper(arr,deep){
+		var sum=0;
+		for(var i=0;i<arr.length;i++){
+			if(arr[i] instanceof Array){
+				sum+=helper(arr[i],deep+1);
+			}
+			if(typeof arr[i]=='number'){
+				sum+=arr[i]*deep;
+			}
+		}
+		return sum;
+	}
+</script>

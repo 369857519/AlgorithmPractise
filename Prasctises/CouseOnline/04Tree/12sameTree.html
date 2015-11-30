@@ -1,0 +1,53 @@
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {boolean}
+ */
+ function treeNode(val){
+		this.val=val;
+		this.left=this.right=null;
+	}
+	//1
+	//10 2
+	//3  3  3  3
+	//2   
+	var arr=[1,10,2,3,3,3,3];
+
+	function buildTree(arr,i){
+		if(arr[i]==null){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+	var root=buildTree(arr,0);
+	var root2=buildTree([1,10,2,3,3,3,3],0);
+	var helper=function(a,b){
+		//这种情况只有在a=b=null在可能发生
+		if(a==b){
+			return true;
+		}
+		if(a==null||b==null){
+			return false;
+		}
+	    if(a.val==b.val&&helper(a.left,b.left)&&helper(a.right,b.right)){
+	        return true;
+	    }else{
+	        return false
+	    }
+	}
+	var isSameTree = function(p, q) {
+	    return helper(p,q);
+	};
+	console.log(isSameTree(root,root2))
+</script>

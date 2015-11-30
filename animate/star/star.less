@@ -1,0 +1,70 @@
+/*#7c509d
+#ce92bf
+#e5cbe1
+#b0a7d1
+#9b72b0*/
+
+/*#fff2b8*/
+body,html{
+	padding: 0px;
+	margin: 0px;
+}
+.background{
+	width: 110%;
+	height: 110%;
+	top: -5%;
+	left: -5%;
+	position: fixed;
+	background:url('imgs/43330.jpg');
+	 -webkit-filter: blur(5px);
+}
+.core{
+	width: 3px;
+	height: 3px;
+	/* border: 1px solid #e5cbe1; */
+	box-shadow: 0 0 17px 8px #9b72b0;
+	border-radius: 1px;
+	background: #9b72b0;
+	top: 50%;
+	left: 50%;
+	position: fixed;
+	z-index: 2;
+}
+.lineFirst{
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	height: 100px;
+	width: 100px;
+	background: #fff;
+	-webkit-animation:bounce 2s linear infinite;
+}
+.lineSecond{
+	position: fixed;
+	left: 30%;
+	top: 30%;
+	height: 100px;
+	width: 100px;
+	background: #fff;
+	-webkit-animation:bounce 4s linear infinite;
+}
+.lineThird{
+	position: fixed;
+	left: 20%;
+	top: 70%;
+	height: 100px;
+	width: 100px;
+	background: #fff;
+	-webkit-animation:tbounce 2s linear infinite;
+}
+@-webkit-keyframes bounce {
+	0% {-webkit-transform: rotateZ(0deg);}
+	50% {-webkit-transform: rotateZ(280deg);}
+	100% {-webkit-transform: rotateZ(360deg);}
+}
+
+@-webkit-keyframes tbounce {
+	0% {-webkit-transform: rotateZ(30deg);}
+	50% {-webkit-transform: rotateZ(310deg);}
+	100% {-webkit-transform: rotateZ(390deg);}
+}

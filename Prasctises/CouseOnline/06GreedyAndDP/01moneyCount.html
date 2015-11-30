@@ -1,0 +1,28 @@
+<script type="text/javascript">
+	//1,2,3,
+	function exchangeCoin(totalNum){
+		var coinArr=[];
+		var num5=parseInt(totalNum/5,10);
+		for(var i=0;i<num5;i++){
+			coinArr.push(5);
+		}
+		var left=totalNum%5;
+		switch(left){
+			case 1:
+				coinArr.push(1);
+				break;
+			case 2:
+				coinArr.push(2);
+				break;
+			case 3:
+				coinArr=coinArr.concat([1,2]);
+				break;
+			case 4:
+				coinArr=coinArr.concat([2,2]);
+				break;
+			default:
+				break;
+		}
+		return coinArr;
+	}
+</script>

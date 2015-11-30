@@ -1,0 +1,33 @@
+<script type="text/javascript">
+
+
+	function treeNode(val,left,right){
+		this.val=val;
+		this.left=left;
+		this.right=right;
+	}
+	//1
+	//10 2
+	//3  3  3  3
+	//2   
+	var arr=[1,10,2,3,3,3,3];
+
+	function buildTree(arr,i){
+		if(arr[i]==null){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+
+	var root=buildTree(arr,0);
+
+	function maxHeight(node){
+
+		return Math.max(node.left?maxHeight(node.left):0,node.right?maxHeight(node.right):0)+1;
+	}
+	//如果是最小高度，需要需要判断没有左右子树的节点中，最小的高度
+	// console.log(maxHeight(root));
+</script>

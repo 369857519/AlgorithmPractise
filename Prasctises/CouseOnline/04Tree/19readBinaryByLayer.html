@@ -1,0 +1,56 @@
+<script type="text/javascript">
+	//10
+	//20  30
+	//5 20  25  null
+	var arr=[10,20,30,5,null,null];
+
+	//节点定义
+	function treeNode(val,left,right){
+		this.val=val;
+		this.left=left;
+		this.right=right;
+	}
+
+	//建立树
+	function buildTree(arr,i){
+		if(arr[i]==undefined){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+
+	//辅助变量声明
+	var queue=[],root=buildTree(arr,0);
+
+	//主方法体
+	function readBinaryByLayer(node){
+		if(node==null){
+			return false;
+		}
+		var layerArr=[],layerCounter=0;
+		queue=[node];
+		//层数
+		while(queue.length!=0){
+			layerArr[layerCounter]=[];
+			var len=queue.length;
+			//每层循环
+			for(var i=0;i<len;i++){
+				//推入左子树
+				if(queue[0].left!=null){
+					queue.push(queue[0].left);
+				}
+				//推入右子树
+				if(queue[0].right!=null){
+					queue.push(queue[0].right);
+				}
+				layerArr[layerCounter].push(queue.shift().val);
+			}
+			layerCounter++;
+		}
+		console.log(layerArr);
+	};
+
+</script>

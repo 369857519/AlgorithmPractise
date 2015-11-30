@@ -1,0 +1,60 @@
+<script type="text/javascript">
+	function treeNode(val,left,right){
+		this.val=val;
+		this.left=left;
+		this.right=right;
+	}
+
+	//1
+	//10 2
+	//3  3  3  3
+	//2   
+	var arr=[1,10,2,3,3,3,3,2];
+	var root=buildTree(arr,0);
+	function buildTree(arr,i){
+		if(arr[i]==undefined){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+	//深度优先搜索
+	function getMin(treeNode){
+		var min=0;
+		helper(treeNode,0);
+	}
+	function helper(treeNode){
+		if(treeNode==null){
+			return 0;
+		}
+		return Math.min(helper(treeNode.left),helper(treeNode.right))+1;
+	}
+	console.log(helper(root,0));
+
+	//广度优先搜索
+	function BFS(root){
+		var queue=[root];
+		BFSHelper(queue);
+	}
+	function BFSHelper(queue){
+		var length=queue.length;
+		if(length==0){
+			return;
+		}
+		for(var i=0;i<length;i++){
+			var levelEle=queue.shift();
+			console.log(levelEle);
+			if(levelEle.left!=null){
+				queue.push(levelEle.left);
+			}
+			if(levelEle.right!=null){
+				queue.push(levelEle.right);
+			}
+		};
+		BFSHelper(queue);
+	}
+
+	BFS(root);
+</script>

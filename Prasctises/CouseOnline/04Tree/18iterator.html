@@ -1,0 +1,62 @@
+<script type="text/javascript">
+	function treeNode(val){
+		this.val=val;
+		this.left=this.right=null;
+	}
+	function buildTree(arr,i){
+		if(arr[i]==null){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+	//		3
+	//	1        5
+	//0    2   4   6
+	//N N N  3
+	// var arr=[3,1,5,0,2,4,6,null,null,null,3];
+	var arr=[1,2];
+	// var arr=[1,2];
+	var root=buildTree(arr,0);
+	var answer,cur,path=new Array();
+	var BSTIterator=function(root){
+		cur=root;
+		answer=null;
+	}
+	var array=[]
+	var inorderTraversal = function(root) {
+	    if(root==null){
+	        return [];
+	    }
+	    inorderTraversal(root.left);
+	    array.push(root.val);
+	    inorderTraversal(root.right);
+	    return array;
+	};
+	function HasNext(){
+		if(answer){
+			return true;
+		}
+		while(cur){
+			path.push(cur);
+			cur=cur.left;
+		}
+		if(path.length==0){
+			return false;
+		}
+		answer=path.pop();
+		cur=answer.right;
+		return true;
+	}
+
+	function next(){
+		result=null;
+		if(HasNext()){
+			result=answer;
+		}
+		answer=null;
+		return result.val;
+	}
+</script>

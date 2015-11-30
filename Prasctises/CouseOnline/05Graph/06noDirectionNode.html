@@ -1,0 +1,70 @@
+<script type="text/javascript">
+	var disArr={1:{
+			2:7,
+			3:9,
+			6:14
+		},2:{
+			1:7,
+			3:10,
+			4:15
+		},3:{
+			1:9,
+			2:10,
+			4:11,
+			6:2,
+		},4:{
+			2:15,
+			3:11,
+			5:6,
+		},5:{
+			4: 6,
+			6:9 
+		},6:{
+			5:9,
+			1:14,
+			3:2
+		}
+	}
+	function dijkstra(n){
+		var mark=[];
+		var d=[];
+		var peopleNum=[],way=[];
+		for(var i=0;i<n;i++){
+			d[i+1]=Infinity;
+			peopleNum[i+1]=0;
+			way[i+1]=0;
+		}
+		d[1]=0;
+		way[1]=1;
+		peopleNum[1]=1;
+		for(var i=0;i<n;i++){
+			var k=-1;
+			//寻找最小的点
+			for(var j=0;j<n;j++){
+				if(!mark[j+1]&&(k==-1||d[j+1]<=d[k]))k=j+1;
+			}
+			//更新node k
+			if(k==-1){
+				return;
+			}
+			mark[k]=true;
+			for(var z=0;z<n;z++){
+				if(!mark[z+1]&&disArr[k][z+1]){
+					// d[z+1]=Math.min(d[z+1],d[k]+disArr[z+1][k]);
+					var temp=d[k]+disArr[z+1][k];
+					if(d[z+1]>temp){
+						d[z+1]=temp;
+						peopleNum[z+1]=z+1+peopleNum[k];
+						way[z+1]=k;
+					}else if(d[z+1]==temp){
+						peopleNum[z+1]=Math.max(peopleNum[z+1]+peopleNum[k],peopleNum[k]);
+						way[z+1]=k;
+					}
+				}
+			}
+		}
+		console.log(d);
+		console.log(way);
+		console.log(peopleNum);
+	}
+</script>

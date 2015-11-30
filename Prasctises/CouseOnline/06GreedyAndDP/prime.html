@@ -1,0 +1,69 @@
+<script type="text/javascript">
+	function TreeNode(val){
+		this.val=val;
+		this.neighbor=[];
+	}
+	var disArr={1:{
+			2:7,
+			3:9,
+			6:14
+		},2:{
+			1:7,
+			3:10,
+			4:15
+		},3:{
+			1:9,
+			2:10,
+			4:11,
+			6:2,
+		},4:{
+			2:15,
+			3:11,
+			5:6,
+		},5:{
+			4:6,
+			6:9 
+		},6:{
+			5:9,
+			1:14,
+			3:2
+		}
+	}
+	function prime(n){
+		var newV=[1];
+		var treeStart=new TreeNode(1);
+		var nodeColl={1:treeStart};
+		var minE=-1,minV=0,former=0;
+		//对已遍历的点进行循环，找出路径最短的未遍历的邻居
+		while(newV.length<n){
+			minE=-1;
+			former=0;
+			for(var j=0;j<newV.length;j++){
+				for(var i in disArr[newV[j]]){
+					var index=parseInt(i);
+					//如果此点已经遍历过，则跳过
+					if(newV.indexOf(index)!=-1){
+						continue;
+					}
+					if(minE==-1){
+						minE=disArr[newV[j]][index];
+						minV=index;
+						former=newV[j];
+					}
+					if(minE>disArr[newV[j]][index]){
+						minV=index;
+						former=newV[j];
+					}
+				}
+			}
+			//j是上一级子元素
+			newV.push(minV);
+			var nextNode=new TreeNode(minV)
+			nodeColl[minV]=nextNode;
+			nodeColl[former].neighbor.push(nextNode);
+			
+		}
+		console.log(newV);
+		console.log(treeStart);
+	}
+</script>

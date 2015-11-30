@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	var answer=[];
+
+	var generateParenthesis=function(n){
+		answer=[];
+		Helper(0,0,'',n);
+		return answer;
+	}
+
+	function Helper(x,y,str,n){
+		if(y==n){
+			answer.push(str);
+			return;
+		}
+		if(x<n){
+			Helper(x+1,y,str+'(',n);
+		}
+		if(x>y){
+			Helper(x,y+1,str+')',n);
+		}
+	}
+</script>

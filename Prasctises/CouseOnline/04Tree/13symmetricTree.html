@@ -1,0 +1,52 @@
+<script type="text/javascript">
+	 function treeNode(val){
+		this.val=val;
+		this.left=this.right=null;
+	}
+	//1
+	//2 2
+	//3  2  2  3
+	var arr=[9,-42,-42,null,76,76,null,null,13,null,13];
+
+	function buildTree(arr,i){
+		if(arr[i]==null){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+	var root=buildTree(arr,0);
+	var isSymmetric = function(root) {
+		arr=[root];
+		return helper();
+	};
+	function helper(){
+		var length=arr.length;
+		for(var i=0;i<length;i++){
+			var tempPtr=arr.shift();
+			if(tempPtr){
+				arr.push(tempPtr.left);
+				arr.push(tempPtr.right);
+			}
+		}
+		if(arr.length==0){
+			return true;
+		}
+		for(var i=0;i<parseInt(arr.length/2);i++){
+			if(arr[i]==null&&arr[arr.length-1-i]!=null){
+				return false;
+			}
+			if(arr[arr.length-1-i]==null&&arr[i]!=null){
+				return false;
+			}
+			if(arr[i]&&arr[arr.length-1-i]){
+				if(arr[i].val!=arr[arr.length-1-i].val){
+					return false;
+				}
+			}
+		}
+		return helper();
+	}
+</script>

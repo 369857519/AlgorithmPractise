@@ -1,0 +1,38 @@
+<script type="text/javascript">
+	function ListNode(val){
+		this.val=val;
+		this.next=null;
+	}
+	function TreeNode(val){
+		this.val=val;
+		this.left=this.right=null;
+	}
+	var head={};
+	head=new ListNode(3);
+	head.next=new ListNode(5);
+	head.next.next=new ListNode(8);
+	var sortedListToBST = function(head) {
+	    if(head==null){
+	    	return null;
+	    }
+	    var length=1;
+	    for(var i=head;i.next!=null;i=i.next){
+	    	length++;
+	    }
+	    return helper(head,length);
+	};
+	function helper(head,length){
+		if(length<=0){
+			return null;
+		}
+		var currentNode={},listNode={};
+		var leftLength=parseInt(length>>1,10);
+		for(var i=0,listNode=head;i<leftLength;i++){
+			listNode=listNode.next;
+		}
+		var treeNode=new TreeNode(listNode.val);
+		treeNode.left=helper(head,leftLength);
+		treeNode.right=helper(listNode.next,length-leftLength-1);
+		return treeNode;
+	}
+</script>

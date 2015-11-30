@@ -1,0 +1,61 @@
+<script type="text/javascript">
+ 	function treeNode(val){
+		this.val=val;
+		this.left=this.right=null;
+	}
+	function buildTree(arr,i){
+		if(arr[i]==null){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+	//		3
+	//	1        5
+	//0    2   4   6
+	//N N N  3
+	//3 2 0 2
+	// var arr=[3,1,5,0,2,4,6,null,null,null];
+	var arr=[1,2,5,3,4,6];
+	var root=buildTree(arr,0);
+	var last={};
+	var flatten=function(root){
+	    helper(root);
+	}
+	function help(root){
+		last=root;
+		if(root==null){
+			return;
+		}
+		var myLast,temp=root.right;
+		helper(root.left);
+		if(myLast){
+			last=myLast;
+		}
+	}
+	// function helper(root){
+	//     if(root==null){
+	// 		return null;
+	// 	}
+	// 	if(!root.left&&!root.right){
+	// 		return root;
+	// 	}
+	// 	var left=helper(root.left);
+	// 	if(first){
+	// 		first=false;
+	// 		rightPrt=root.left?root.left:root.right;
+	// 	}
+	// 	var right=helper(root.right);
+	// 	if(left){
+	// 		root.right=left;
+	// 		if(right){
+	// 			for(i=right;i.right!=null;i=i.right){};
+	// 			rightPrt.right=right;
+	// 			rightPrt=i;
+	// 		}
+	// 	}
+	// 	return root;
+	// }
+</script>

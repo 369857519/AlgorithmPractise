@@ -1,0 +1,44 @@
+<script type="text/javascript">
+var	stk=[],
+lengthArray=[];
+var ladderLength = function(beginWord, endWord, wordDict) {
+	lengthArray=[];
+	stk=[];
+	helper(beginWord,endWord,wordDict);
+	var answer=lengthArray.sort()[0];
+    return answer?0:answer;
+};
+function helper(beginWord,endWord,wordDict){
+	var different=0;
+
+	//先check end,如果endcheck成功的话，就直接return;
+	different=differentWordCount(beginWord,endWord);
+	if(different==1){
+		//已经到了结束,就不需要继续逐个比对
+		lengthArray.push(stk.length+2);
+		return;
+	}
+
+	for(var i=0;i<wordDict.length;i++){
+		//如果没有check过这个单词，进行一次check
+		if(stk.indexOf(wordDict[i])==-1){
+			different=differentWordCount(beginWord,wordDict[i])
+		}
+		if(different==1){
+			stk.push(wordDict[i]);
+			helper(wordDict[i],endWord,wordDict);
+			stk.pop();
+		}
+	}
+}
+
+function differentWordCount(a,b){
+	var different=0;
+	for(var i=0;i<a.length;i++){
+		if(a[i]!=b[i]){
+			different++;
+		}
+	}
+	return different;
+}
+</script>

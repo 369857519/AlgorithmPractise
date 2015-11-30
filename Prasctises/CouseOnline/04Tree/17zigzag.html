@@ -1,0 +1,53 @@
+<script type="text/javascript">
+	function treeNode(val){
+		this.val=val;
+		this.left=this.right=null;
+	}
+	function buildTree(arr,i){
+		if(arr[i]==null){
+			return null;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+	//		3
+	//	1        5
+	//0    2   4   6
+	//N N N  3
+	// var arr=[3,1,5,0,2,4,6,null,null,null];
+	var arr=[1,2];
+	var root=buildTree(arr,0);
+	var number=[[]];
+	var zigzagLevelOrder=function(root){
+		if(root){
+			number[0].push(root);
+		}else{
+			return [number];
+		}
+		helper(root,0);
+		return number;
+	}
+	function helper(root,index){
+		var temArr=[],length=0;
+		while(true){
+			temArr=[];
+			length=number[index].length;
+			for(var i=0;i<length;i++){
+				if(number[index][i].left){
+					temArr.push(number[index][i].left);
+				}
+				if(number[index][i].right){
+					temArr.push(number[index][i].right);
+				}
+			}
+			if(temArr.length){
+				number.push(temArr);
+			}else{
+				break;
+			}
+			index++;
+		}
+	}
+</script>

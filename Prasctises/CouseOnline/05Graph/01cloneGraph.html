@@ -1,0 +1,61 @@
+<script type="text/javascript">
+	/**
+	 * Definition for undirected graph.
+	 * function UndirectedGraphNode(label) {
+	 *     this.label = label;
+	 *     this.neighbors = [];   // Array of UndirectedGraphNode
+	 * }
+	 */
+
+	/**
+	 * @param {UndirectedGraphNode} graph
+	 * @return {UndirectedGraphNode}
+	 */
+	var map={};
+	var cloneGraph = function(graph) {
+	    map={}
+	    if(graph===null){
+	        return null;
+	    }
+	    return BFSIterator(graph);
+	};
+
+
+	function DFSHelper(graph){
+		if(map[graph.label]===undefined){
+			var newNode=new UndirectedGraphNode(graph.label);
+			map[newNode.label]=newNode;
+			for(var i=0;i<graph.neighbors.length;i++){
+				newNode.neighbors.push(DFSHelper(graph.neighbors[i]));
+			}
+			return newNode;
+		}else{
+			return map[graph.label];
+		}
+	}
+	var map={};
+	var BFSIterator=function(graph){
+		var queue=[graph];
+		map[graph.label]=new UndirectedGraphNode(graph.label);
+		while(queue.length!=0){
+			var length=queue.length;
+			for(var i=0;i<length;i++){
+				var currentNode=queue.shift();
+				for(var j=0;j<currentNode.neighbors.length;j++){
+					//是否包含
+					if(map[currentNode.neighbors[j].label]==null){
+						queue.push(currentNode.neighbors[j]);
+						//给neighbors增添节点
+						var newNode=new UndirectedGraphNode(currentNode.neighbors[j].label)
+						map[currentNode.label].neighbors.push(newNode);
+						map[currentNode.neighbors[j].label]=newNode
+					}else{
+						//
+						map[currentNode.label].neighbors.push(map[currentNode.neighbors[j].label]);
+					}
+				}
+			}
+		}
+		return map[graph.label];
+	}
+</script>

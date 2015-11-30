@@ -1,0 +1,59 @@
+<script type="text/javascript">
+	function treeNode(val,left,right){
+		this.val=val;
+		this.left=left;
+		this.right=right;
+	}
+	//arr
+	//	     1
+	//	  2      3
+	//	4  5   6 null
+	//7 8 9 10 11 12 null null
+	var arr=[1,2,3,4,5,6,null,7,8,9,10,11,12,null,null];
+	function buildTree(arr,i){
+		if(i>=arr.length){
+			return;
+		}
+		var node=new treeNode(arr[i]);
+		node.left=buildTree(arr,(i+1)*2-1);
+		node.right=buildTree(arr,(i+1)*2);
+		return node;
+	}
+
+	var root=buildTree(arr,0);
+
+	var balanceFlag=true;
+	function isBalance(node){ 
+		if(node==null||node.val==null){
+			return 0;
+		}
+
+		var leftHeight=isBalance(node.left);
+		var rightHeight=isBalance(node.right);
+		if(Math.abs(leftHeight-rightHeight)>1){
+			balanceFlag=false;
+		} 
+		return Math.max(leftHeight,rightHeight)+1;
+	}
+	isBalance(root);
+
+	function isBalance2(node){
+		if(node.val==null||(!node.left&&!node.right)){
+			node.height=0;
+			return true;
+		}
+		if(isBalance2(node.left)){
+			return false;
+		}
+		if(isBalance2(node.right)){
+			return false;
+		}
+		node.height=Math.max(node.left.height,node.right.height)+1; 
+		if(Math.abs(node.left.height-node.right.height)>1){
+			return false;
+		}
+		return true;
+	}
+	console.log(balanceFlag);
+	console.log(isBalance2(root));
+</script>

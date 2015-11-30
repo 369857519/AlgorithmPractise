@@ -1,0 +1,44 @@
+<script type="text/javascript">
+	var stk=[];
+	var resultArray=[];
+	var solveNQueens = function(n) {
+	    var mark=[],
+	    haveD1=[],
+	    haveD2=[];
+	    resultArray=[];
+	    helper(0,n,mark,haveD1,haveD2);
+	    return resultArray;
+	};
+	function helper(now,n,mark,haveD1,haveD2){
+		if(now==n){
+			generateResult(stk,n);
+			return;
+		}
+	    for(var i=0;i<n;i++){
+	    	if(!mark[i]&&!haveD1[i+now]&&!haveD2[i-now+n-1]){
+	    		mark[i]=haveD1[i+now]=haveD2[i-now+n-1]=true;
+	    		stk.push(i);
+	    		helper(now+1,n,mark,haveD1,haveD2);
+	    		stk.pop();
+	    		mark[i]=haveD1[i+now]=haveD2[i-now+n-1]=false;
+	    	}
+	    }
+	}
+
+	function generateResult(arr,n){
+		var str="";
+		resultArray.push([]);
+		for(var i=0;i<arr.length;i++){
+			str=""
+			for(var j=0;j<n;j++){
+				if(j==arr[i]){
+					str+="Q"
+				}else{
+					str+="."
+				}
+			}
+			resultArray[resultArray.length-1].push(str);
+		}
+	}
+
+</script>

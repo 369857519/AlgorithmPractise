@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>stars</title>
+	<meta name="viewport"
+          content="width=320,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
+    <script src="ball.js"></script>
+</head>
+<body>
+<canvas id="cocoCanvas" width="400" height="400"></canvas>
+<script>
+	window.addEventListener('DOMContentLoaded',function(){
+		var cocoCanvas=document.getElementById('cocoCanvas'),
+		context=cocoCanvas.getContext('2d'),
+		ball=new Ball(),
+		angleX=0,
+		angleY=0;
+		ball.x=cocoCanvas.width/2;
+		ball.y=cocoCanvas.height/2;
+
+		(function drawFrame(){
+			window.requestAnimationFrame(drawFrame,cocoCanvas)
+			context.clearRect(0,0,cocoCanvas.width,cocoCanvas.height);
+			ball.y=cocoCanvas.height/2+Math.sin(angleY)*50;
+			ball.x=cocoCanvas.width/2+Math.sin(angleX)*50;
+			// ball.x=cocoCanvas.width/2+Math.cos(angleX)*50;
+			// ball.x=cocoCanvas.width/2+angleX;
+
+			//这里可以用+ -  线性
+			angleX+=0.11;
+			//对比在1  1.1  0.1时的表现
+			angleY+=0.1;
+			ball.draw(context);
+			
+		})();
+	})
+</script>
+</body>
+</html>
