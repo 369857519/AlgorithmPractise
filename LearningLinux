@@ -1,0 +1,153 @@
+commond [-options] parameter1 parameter2
+	ls -al
+	date +%Y/%m/%d
+
+	ls -al .bashrc*
+	date
+	cal
+	bc
+	cp [copy]
+	ctrl+d/c
+	shift+PageUp/PageDown
+
+	man date
+		1	使用者在shell環境中可以操作的指令或可執行檔
+		2	系統核心可呼叫的函數與工具等
+		3	一些常用的函數(function)與函式庫(library)，大部分為C的函式庫(libc)
+		4	裝置檔案的說明，通常在/dev下的檔案
+		5	設定檔或者是某些檔案的格式
+		6	遊戲(games)
+		7	慣例與協定等，例如Linux檔案系統、網路協定、ASCII code等等的說明
+		8	系統管理員可用的管理指令
+		9	跟kernel有關的文件
+
+	date -help
+
+
+profile verify
+	ls
+	ls -al
+	touch test/test 创建普通文档
+	ls -ald test test/test 查看两个文档的详细信息
+		-rwxr-xr--  1 test1    testgroup    5238 Jun 19 10:25 ping_tsai
+		没有x不能进入目录
+	权限修改
+		chgrp staff ./app.js
+		chown
+		chmod
+			rwx = 4+2+1 = 7
+			chmod 777 .bashrc  相当于-rwxrwxrwx
+		如果有文件夹权限rwx，没有文件权限.可以将没权限的文件删除。
+	类型
+		regular file
+		directory
+		link
+		device
+			block b
+			character c
+		sockets
+		FIFO,pipe
+	FHS
+		约定内容
+		/	 根目录
+		/usr unix software resource
+		/var variable
+
+		/usr 软件
+		/etc 设定档
+		/opt 第三方协力软件
+		/boot 开关机核心
+		/var 安装程序
+profile management
+	operation
+		cd
+			-  表示回到上一次到达的目录
+		pwd
+			pwd -P 显示源文件的地址，而不是link的地址
+		mkdir
+			mkdir -p 自行建立多层目录
+		rmdir
+			rmdif -p 删除多个目录，但只能删除空目录
+
+		ls
+			-a  列出隐藏文件夹
+			-l  详细信息
+			-r  翻转顺序
+			-d  仅列出目录本身
+
+		cp
+			-a -dr --preserve=all，保持所有属性
+			-i 若目标存在，先询问动作
+			-p 将文档属性一起复制过去，而不是使用预设的属性
+			-r 循环
+			-s 建立链接，即快捷方式
+		ln  -s
+			创建软链接
+		rm
+			-i
+			-r
+		mv
+		basename
+		dirname
+	search
+		cat  由第一行開始顯示檔案內容
+		tac  從最後一行開始顯示，可以看出 tac 是 cat 的倒著寫！
+		nl   顯示的時候，順道輸出行號！
+		more 一頁一頁的顯示檔案內容
+		less 與 more 類似，但是比 more 更好的是，他可以往前翻頁！
+		head 只看頭幾行
+			-n number
+		tail 只看尾巴幾行
+			-n number
+		od   以二進位的方式讀取檔案內容！
+
+		cat
+			-n
+			-A 全部显示
+	touch档案
+		主要时间点
+			mtime: modification time
+			ctime: ctime
+			atime:accesstime
+	umask
+		002 真实权限是  目录：7-0 7-0 7-2 档案：6-0 6-0 6-2
+		用于建立共享档案与目录
+	隐藏属性
+		chattr +a test  只能增加，不能删除
+		chattr +i test  不能对文档做任何操作
+
+		lsattr 显示
+	SUID
+		可以在执行时获得root的权限，仅对binary程序可用
+	SGID
+		可以在执行时，获得root的权限
+	which
+	whereis
+	find
+		find ./ -time -4  四天内动过的
+		find ./ -time +4  四天前之前动过的
+		find ./ -user qilianshan
+		find ./ -nouser 
+		find ./ -name 
+		find ./ -type 
+		find /usr/bin/ /usr/sbin/ -exec ls -l {} \; 找到后并执行,其中{}代表找到后的关键字
+		find / -size +1M
+		找到50k到60k之间的文件并输出
+		find ./ -size +50k -a -size -100k -exec ls -l {} \;
+		找到50k以上而且不属于root的文件
+		find ./ -size +50k -not -user root -exec ls -l {} \;
+
+问题：目录-是什么意思
+od
+cat -n
+ access time(atime), status time (ctime), modification time(mtime)
+
+
+
+			
+
+
+
+
+
+
