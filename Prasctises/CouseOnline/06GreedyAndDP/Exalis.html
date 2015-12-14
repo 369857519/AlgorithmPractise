@@ -1,0 +1,19 @@
+<script>
+	function lengthOfLIS(nums){
+	    if(nums.length>1){
+	        var tempArr=[1],maxLen=0;
+	        for(var i=1;i<nums.length;i++){
+	        	maxLen=1;
+	            for(var j=0;j<i;j++){
+	                if(nums[i]>nums[j]){
+	                	//如果numi>numj,可以组成单调递增序列
+	                	maxLen=Math.max(maxLen,tempArr[j]);
+	                }
+	            }
+	        }
+	        return tempArr;
+	    }else{
+	        return temp.length;
+	    }
+	}	
+</script>

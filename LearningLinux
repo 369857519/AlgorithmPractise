@@ -1,3 +1,5 @@
+paper clip 11
+ice 7
 commond [-options] parameter1 parameter2
 	ls -al
 	date +%Y/%m/%d
@@ -137,10 +139,21 @@ profile management
 		找到50k以上而且不属于root的文件
 		find ./ -size +50k -not -user root -exec ls -l {} \;
 
-问题：目录-是什么意思
-od
-cat -n
- access time(atime), status time (ctime), modification time(mtime)
+	问题：目录-是什么意思
+	od
+	cat -n
+	 access time(atime), status time (ctime), modification time(mtime)
+
+fileSystem
+	superlock:记录filesystem的整体咨询，包括inode/block的总量，剩余量，文档系统格式的相关信息
+	inode:记录档案属性，一个档案占用一个inode
+	block:档案实际内容，档案太大会占用多个block
+
+	indexed allocation
+	FAT 链式
+
+	整个存储区会氛围多个block group，每个group内拥有自己的superblock,档案描述，区块对应表，InodeTable,Data Block
+
 
 
 
