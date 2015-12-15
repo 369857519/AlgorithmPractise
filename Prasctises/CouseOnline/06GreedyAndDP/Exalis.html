@@ -7,13 +7,14 @@
 	            for(var j=0;j<i;j++){
 	                if(nums[i]>nums[j]){
 	                	//如果numi>numj,可以组成单调递增序列
-	                	maxLen=Math.max(maxLen,tempArr[j]);
+	                	maxLen=Math.max(maxLen,tempArr[j]+1);
 	                }
 	            }
+	            tempArr[i]=maxLen;
 	        }
-	        return tempArr;
+	        return tempArr.sort(function(a,b){return b-a;})[0];
 	    }else{
-	        return temp.length;
+	        return nums.length;
 	    }
 	}	
 </script>

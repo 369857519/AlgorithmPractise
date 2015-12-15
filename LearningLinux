@@ -154,6 +154,9 @@ fileSystem
 
 	整个存储区会氛围多个block group，每个group内拥有自己的superblock,档案描述，区块对应表，InodeTable,Data Block
 
+	查看inode地址
+	ll -di / /etc /passwd
+
 
 
 
