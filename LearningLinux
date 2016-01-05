@@ -1,5 +1,33 @@
-paper clip 11
-ice 7
+多乐一天
+	罗福   500230199202156221 身高156 体重44 鞋码35 租单板 头盔 衣服 眼镜
+	刘鸣   110105199001200439 身高172 体重74 鞋码44 租双板 头盔
+	李欣   450304198409071018 身高177 体重75 鞋码43 租双板 头盔
+	祁连山 140581199110260012 身高172 体重70 鞋码41 租单板 头盔
+	曲虹臻 370203198908124522 身高162 体重48 鞋码38 租单板
+	张亮   410881198904258552 身高165 体重75 鞋码41 租单板 头盔
+云顶两天
+	朱致远 542221198907040518 租头盔
+	鄢舒源 350781198911220016 租头盔
+	寇秦荔 630104199012271027 身高158 体重47 鞋码35 租单板 头盔
+
+
+云顶两天报名地址：选25号的套餐2进行支付，1015元，包含所有费用
+	http://huaxue.lvye.cn/trip/22/
+多乐一天报名地址：选12月25号的套餐三进行支付，450元，包含去程大巴，一天住宿，雪票，
+注意多乐一天的是咱们自己返程，回程会打车到张家口（每人67），然后坐火车回京（每人29.5），所以多乐一天的同学每人67+29.5＋450=546.5
+	http://huaxue.lvye.cn/trip/75/
+另外租板子的费用是自己到店里掏的，根据每个人租东西去算，就不算在这里面了。
+大巴出发时间周五晚上7:30，奥体中心C口出
+
+
+多乐一天花费总计： 单天雪票284+单天住宿75+去程大巴100+回程出租66+回程火车票29.5=554.5
+云顶一天花费跟团总计： 两天滑雪,1015元
+
+
+
+paper clip  cycle:11  favoriteColor:blue yellow
+ice 		cycle:7   
+
 commond [-options] parameter1 parameter2
 	ls -al
 	date +%Y/%m/%d
@@ -156,6 +184,132 @@ fileSystem
 
 	查看inode地址
 	ll -di / /etc /passwd
+
+	df 查看容量,用inode的方式,以及所挂载的partition
+	df -h 用容量单位的方式查看
+
+	du 查看当前目录下文件夹的大小
+	du -a 同时显示出文件和文件夹的大小
+	du -sm ../* 
+
+	ln -i /etc/crontab .crontab 硬链接
+	ln -s /etc/cronts .crontab 软链接
+
+	liblk 显示系统上的磁碟列表
+
+compress
+	.tar.tar.gz.tgz.gz.Z.bz2.xz
+
+	gzip -9 -c services > services.gz 压缩 1-9压缩等级 c会将压缩的资料输出
+	gzip -d services.gz 解压缩
+
+	bzip2 压缩比>gzip
+
+	xz 压缩比>bzip2
+
+	tar解压
+	tar -zcv -f services.gz services
+	tar -ztv -f services
+	tar -zxv -f services.gz
+
+	xfsdump 备份完整的档案系统
+	xfsrestore 还原系统
+
+	dd if="input_file" of=""
+
+vi
+	编辑器模式：
+		command mode
+		insert mode
+		command-line mode
+	[Ctrl] + [f]	螢幕『向下』移動一頁，相當於 [Page Down]按鍵 (常用)
+	[Ctrl] + [b]	螢幕『向上』移動一頁，相當於 [Page Up] 按鍵 (常用)
+	0 或功能鍵[Home]	這是數字『 0 』：移動到這一列的最前面字元處 (常用)
+	gg	移動到這個檔案的第一列，相當於 1G 啊！ (常用)
+	n<Enter>	n 為數字。游標向下移動 n 列(常用)
+	u	復原前一個動作。(常用)
+	[Ctrl]+r	重做上一個動作。(常用)
+	$ 或功能鍵[End]	移動到這一列的最後面字元處(常用)
+	G	移動到這個檔案的最後一列(常用)
+	gg	移動到這個檔案的第一列，相當於 1G 啊！ (常用)
+	n<Enter>	n 為數字。游標向下移動 n 列(常用
+	/word	向游標之下尋找一個名稱為 word 的字串。例如要在檔案內搜尋 vbird 這個字串，就輸入 /vbird 即可！ (常用)
+	:n1,n2s/word1/word2/g	n1 與 n2 為數字。在第 n1 與 n2 列之間尋找 word1 這個字串，並將該字串取代為 word2 ！舉例來說，在 100 到 200 列之間搜尋 vbird 並取代為 VBIRD 則：『:100,200s/vbird/VBIRD/g』。(常用)
+	:1,$s/word1/word2/g	從第一列到最後一列尋找 word1 字串，並將該字串取代為 word2 ！(常用)
+	dd	刪除游標所在的那一整列(常用)
+	ndd	n 為數字。刪除游標所在的向下 n 列，例如 20dd 則是刪除 20 列 (常用)
+	nyy	n 為數字。複製游標所在的向下 n 列，例如 20yy 則是複製 20 列(常用)
+	p, P	p 為將已複製的資料在游標下一列貼上，P 則為貼在游標上一列！ 舉例來說，我目前游標在第 20 列，且已經複製了 10 列資料。則按下 p 後， 那 10 列資料會貼在原本的 20 列之後，亦即由 21 列開始貼。但如果是按下 P 呢？ 那麼原本的第 20 列會被推到變成 30 列。 (常用)
+	u	復原前一個動作。(常用)
+	[Ctrl]+r	重做上一個動作。(常用)
+	:wq	儲存後離開，若為 :wq! 則為強制儲存後離開 (常用)ls
+
+	块级编辑
+		v选择区域
+		y复制
+		d删除选中块儿
+		p粘贴选中块儿
+		ctrl+v
+	多文本编辑
+		ctrl+n
+		ctrl+f
+	多窗口编辑
+		:sp
+		ctrl+w+j
+		ctrl+w+k
+shell
+	种类
+		/bin/sh
+		/bin/bash
+		/bin/tcsh
+		/bin/csh
+	Bash shell功能
+		history  记忆使用过的指令
+		tab 档案补全功能
+		alias 给命令取别名 alias lm='ls -al'
+		job control,forground background 工作控制，前后背景
+		shell script 程序化脚本
+	查询帮助
+		man bash
+		type cd
+	命令行操作
+		ctrl+u/k 删除光标前/后
+		ctrl+a/e 移动光标至头/尾
+	变量
+		name=ccc
+		echo $name  设置与使用环境变量
+		ls -ld `locate crontab` 反引号代表先执行引号内的内容
+		env 查看环境变量
+		set 查看所有变量
+		变量详细
+			locale
+			RANDOM
+		变量作用范围
+		read
+		declare
+			-x export to homevar
+			-r readonly
+			-i int
+		array
+			arr[1]=value
+		ulimit
+			-a 限制用户的使用
+			${變數#關鍵字}
+			${變數##關鍵字}	若變數內容從頭開始的資料符合『關鍵字』，則將符合的最短資料刪除
+			若變數內容從頭開始的資料符合『關鍵字』，則將符合的最長資料刪除
+			${變數%關鍵字}
+			${變數%%關鍵字}	若變數內容從尾向前的資料符合『關鍵字』，則將符合的最短資料刪除
+			若變數內容從尾向前的資料符合『關鍵字』，則將符合的最長資料刪除
+			${變數/舊字串/新字串}
+			${變數//舊字串/新字串}	若變數內容符合『舊字串』則『第一個舊字串會被新字串取代』
+			若變數內容符合『舊字串』則『全部的舊字串會被新字串取代』
+		常用设定
+			new_var=${new_var-ccc}  默认情况下会设置成ccc
+		
+
+
+
+
 
 
 

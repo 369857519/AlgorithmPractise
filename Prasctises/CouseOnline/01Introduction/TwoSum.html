@@ -1,0 +1,24 @@
+<script>
+	var twoSum = function(nums, target) {
+		var map={};
+    	for(var i=0;i<nums.length;i++){
+    		if(nums[i]<=target){
+    			if(map[nums[i]]===undefined){
+    				if(map[nums[i]] instanceof Array){
+    					map[nums[i]].push(i);
+    				}else{
+    					map[nums[i]]=[map[nums[i]],i];
+    				}
+    			}else{
+    				map[nums[i]]=i;
+    			}
+    		}
+    	};
+    	console.log(map);
+    	for(var i in map){
+    		if(map[target-i]&&map[target-i]>map[i]){
+    			return [map[i]+1,map[target-i]+1]
+    		}
+    	}
+	};
+</script>
