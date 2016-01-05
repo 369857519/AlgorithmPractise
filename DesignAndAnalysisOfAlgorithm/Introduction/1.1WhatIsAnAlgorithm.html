@@ -1,0 +1,39 @@
+<script>
+	//1.1.4ComputingSqureRoot
+	//1.assign p<-1
+	//2.if p*p<=n,add 1 to p and goto 2,else goto 3
+	//3.return p-1
+	function ComputingSqureRoot(n){
+		var p=1;
+		while(p*p<=n){
+			p++
+		}
+		return p-1;
+	}
+
+	//1.1.5FindAllCommonElements
+	//Input:two list of sorted number:list1 list2
+	//Output:list of common number from list1 and list2:list3
+	//1. assign i<-0 j<-0,
+	//2. if(i<=m,j<=n)compare list[i] and list[j] else end
+	//3. if list1[i]=list2[j],i=i+1,j=j+1. add list[i] to list3 and goto 2
+	//4. if list1[i]<list2[j],i=i+1. goto 2
+	//5. if list1[i]>list2[j],j=j+1. goto 2
+
+	function FindAllCommonElements(list1,list2){
+		var m=list1.length,n=list2.length,i=0,j=0,list3=[];
+		while(i<m&&j<n){
+			var diff=list1[i]-list2[j];
+			if(diff>0){
+				j++;
+			}else if(diff<0){
+				i++;
+			}else if(diff==0){
+				list3.push(list1[i]);
+				j++;
+				i++;
+			}
+		}
+		console.log(list3);
+	}
+</script>
