@@ -305,7 +305,40 @@ shell
 			若變數內容符合『舊字串』則『全部的舊字串會被新字串取代』
 		常用设定
 			new_var=${new_var-ccc}  默认情况下会设置成ccc
-		
+	alias
+		alias cls='clear'
+		unalias lm='ls -al|more'
+	bash欢迎信息
+		/etc/issue
+		/etc/motd
+	History
+		number 查看
+		-c
+		-w
+	PATH
+		login shell：
+			/etc/profile
+			~/.bash_profile
+		no-login shell:
+			~/.bashrc
+	终端机设定
+		stty -a  查看终端机设置
+		stty erase ^h
+			设置回退快捷键
+			ctrl+s 锁死
+			ctrl+q 开始	
+		元字符
+			* ? [] [-] [^] 于正则表达时
+		bash特殊符号
+			# 注释
+			\ 跳脱
+			| 两条管线命令
+			; 分割
+			~ 自家目录
+			$ 变量前
+			& job control
+			! 非
+			/ 路径分割符号
 
 
 
