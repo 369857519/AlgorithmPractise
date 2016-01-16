@@ -1,0 +1,51 @@
+jQuery.fn.extend()
+	实现核心
+	for(;i<length;i++){
+		if((options=arguments[i])!=null){
+			for(name in options){
+				src=target[name];
+				copy=options[name];
+				//o={n1:o}
+				//Prevent never-ending loop,这一句规避了extend(true,o,{n3:o})的无限循环
+				if(target===copy){
+					continue;
+				}
+
+				if(deep&&copy&&(jQuery.isPlainObject(copy)||(copyIsArray=jQuery.isArrray(copy)))){
+					if(copyIsArray){
+						copyIsArray=false;
+						clone=src&&jQuery.isArrray(src)?src:[];
+					}else{
+						clone=src&&jQuery.isPlainObject(src)?src:[];
+					}
+
+					target[name]=jQuery.extend(deep,clone,copy);
+				}else if(copy!==undefined){
+					target[name]=copy;
+				}
+			}
+		}
+	}
+jQuery基本方法：
+	jQuery.fn=jQuery.prototype={
+		constructor:jQuery,
+		init:function(selector,context,rootjQuery){},
+		selector:"",
+		jQuery:"1.7.1",
+		length:0,
+		size:function(){},
+		toArray:function(){},
+		get:function(num){},
+		pushStack:function(elems,name,selector){},
+		each:function(){},
+		ready:function(fn){},
+		eq:function(fn){},
+		first:function(){},
+		last:function(){},
+		slice:function(){},
+		map:function(){},
+		end:function(){},
+		push:push,
+		sort:[].sort,
+		splice:[].splice
+	}

@@ -1,0 +1,93 @@
+<script>
+	//1.2.1
+	//old world puzzle
+	//send goat to oppsite bank
+	//back alone
+	//send cabbage to oppsite bank
+	//back with goat
+	//send wolf to oppsite bank
+	//back alone
+	//carry goat to oppsite bank,success
+
+	//1.2.2
+	//new world puzzle
+	//don't google anymore
+
+	//1.2.3
+	//a can be considered an algorithm
+	//p=(a+b+c)/2
+	//S=Math.sqrt((p-a)(p-b)(p-c))
+
+	//1.2.4
+	//(-b+Math.sqrt(b*b-4*a*c))/(2*a)
+	//(-b-Math.sqrt(b*b-4*a*c))/(2*a)
+
+	//1.2.6
+	//
+	//1.answer is binary
+	//2.divide n by 2 then get remainder x and divisor y. x is the last bit of binary
+	//3.if y=1 or y=0,add y to the bit of binary.assign n=y.goto 2
+
+	//1.2.7
+	//this problem can't be solved exactly,because pi is infinite no loop float
+	//infinite num of problem
+	//
+
+	//1.2.8
+	//Euclidean algorthm and comsecutive integer checking
+	//I think Euclid is much more beautiful
+	//It's proving is also beautiful enough
+
+	//1.2.9
+	//sort and compare
+	//random select a pivot from list
+	//for i in list
+	//if(list[i]<pivot) switch list[i] to pivot left
+	//if(list[i]>pivot) switch list[i] to pivot right
+	//
+	function quickSort(list,start,end){
+		if(start==end){
+			return;
+		}
+		var p=start,i=start,j=end;
+		while(i<=j){
+			if(list[p]>list[i]){
+				var temp=list[p];
+				list[p]=list[i];
+				list[i]=temp;
+				p=i;
+			}
+			i++;
+		}
+		quickSort(list,start,p);
+		quickSort(list,p+1,end);
+		return list;
+	}
+
+	function getMinGap(list){
+		quickSort(list,0,list.length-1);
+		min=list[1]-list[0];
+		console.log(list);
+		for(var i=0;i<list.length-1;i++){
+			var temp=list[i+1]-list[i];
+			if(min>temp){
+				min=temp;
+			}
+		}
+		return min;
+	}
+
+	//1.2.10
+	//1 you have to understand the problem
+	//2 after understanding,then make a plan
+	//3 carry out the plan
+	//4 look back on your work
+
+	//first they both need to define the problem
+	//the plan is a more general description of algorithm
+	//so make a plan and carry out it is same as design algorithm and coding it
+	//look back is also same as ultimati
+	//the difference is algorithmic problem solving is more vigorious
+	//we need to analyzing and proving,it is much hader and specific
+ 
+</script>

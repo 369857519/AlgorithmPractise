@@ -1,0 +1,356 @@
+多乐一天
+	罗福   500230199202156221 身高156 体重44 鞋码35 租单板 头盔 衣服 眼镜
+	刘鸣   110105199001200439 身高172 体重74 鞋码44 租双板 头盔
+	李欣   450304198409071018 身高177 体重75 鞋码43 租双板 头盔
+	祁连山 140581199110260012 身高172 体重70 鞋码41 租单板 头盔
+	曲虹臻 370203198908124522 身高162 体重48 鞋码38 租单板
+	张亮   410881198904258552 身高165 体重75 鞋码41 租单板 头盔
+云顶两天
+	朱致远 542221198907040518 租头盔
+	鄢舒源 350781198911220016 租头盔
+	寇秦荔 630104199012271027 身高158 体重47 鞋码35 租单板 头盔
+
+
+云顶两天报名地址：选25号的套餐2进行支付，1015元，包含所有费用
+	http://huaxue.lvye.cn/trip/22/
+多乐一天报名地址：选12月25号的套餐三进行支付，450元，包含去程大巴，一天住宿，雪票，
+注意多乐一天的是咱们自己返程，回程会打车到张家口（每人67），然后坐火车回京（每人29.5），所以多乐一天的同学每人67+29.5＋450=546.5
+	http://huaxue.lvye.cn/trip/75/
+另外租板子的费用是自己到店里掏的，根据每个人租东西去算，就不算在这里面了。
+大巴出发时间周五晚上7:30，奥体中心C口出
+
+
+多乐一天花费总计： 单天雪票284+单天住宿75+去程大巴100+回程出租66+回程火车票29.5=554.5
+云顶一天花费跟团总计： 两天滑雪,1015元
+
+
+
+paper clip  cycle:11  favoriteColor:blue yellow
+ice 		cycle:7   
+
+commond [-options] parameter1 parameter2
+	ls -al
+	date +%Y/%m/%d
+
+	ls -al .bashrc*
+	date
+	cal
+	bc
+	cp [copy]
+	ctrl+d/c
+	shift+PageUp/PageDown
+
+	man date
+		1	使用者在shell環境中可以操作的指令或可執行檔
+		2	系統核心可呼叫的函數與工具等
+		3	一些常用的函數(function)與函式庫(library)，大部分為C的函式庫(libc)
+		4	裝置檔案的說明，通常在/dev下的檔案
+		5	設定檔或者是某些檔案的格式
+		6	遊戲(games)
+		7	慣例與協定等，例如Linux檔案系統、網路協定、ASCII code等等的說明
+		8	系統管理員可用的管理指令
+		9	跟kernel有關的文件
+
+	date -help
+
+
+profile verify
+	ls
+	ls -al
+	touch test/test 创建普通文档
+	ls -ald test test/test 查看两个文档的详细信息
+		-rwxr-xr--  1 test1    testgroup    5238 Jun 19 10:25 ping_tsai
+		没有x不能进入目录
+	权限修改
+		chgrp staff ./app.js
+		chown
+		chmod
+			rwx = 4+2+1 = 7
+			chmod 777 .bashrc  相当于-rwxrwxrwx
+		如果有文件夹权限rwx，没有文件权限.可以将没权限的文件删除。
+	类型
+		regular file
+		directory
+		link
+		device
+			block b
+			character c
+		sockets
+		FIFO,pipe
+	FHS
+		约定内容
+		/	 根目录
+		/usr unix software resource
+		/var variable
+
+		/usr 软件
+		/etc 设定档
+		/opt 第三方协力软件
+		/boot 开关机核心
+		/var 安装程序
+profile management
+	operation
+		cd
+			-  表示回到上一次到达的目录
+		pwd
+			pwd -P 显示源文件的地址，而不是link的地址
+		mkdir
+			mkdir -p 自行建立多层目录
+		rmdir
+			rmdif -p 删除多个目录，但只能删除空目录
+
+		ls
+			-a  列出隐藏文件夹
+			-l  详细信息
+			-r  翻转顺序
+			-d  仅列出目录本身
+
+		cp
+			-a -dr --preserve=all，保持所有属性
+			-i 若目标存在，先询问动作
+			-p 将文档属性一起复制过去，而不是使用预设的属性
+			-r 循环
+			-s 建立链接，即快捷方式
+		ln  -s
+			创建软链接
+		rm
+			-i
+			-r
+		mv
+		basename
+		dirname
+	search
+		cat  由第一行開始顯示檔案內容
+		tac  從最後一行開始顯示，可以看出 tac 是 cat 的倒著寫！
+		nl   顯示的時候，順道輸出行號！
+		more 一頁一頁的顯示檔案內容
+		less 與 more 類似，但是比 more 更好的是，他可以往前翻頁！
+		head 只看頭幾行
+			-n number
+		tail 只看尾巴幾行
+			-n number
+		od   以二進位的方式讀取檔案內容！
+
+		cat
+			-n
+			-A 全部显示
+	touch档案
+		主要时间点
+			mtime: modification time
+			ctime: ctime
+			atime:accesstime
+	umask
+		002 真实权限是  目录：7-0 7-0 7-2 档案：6-0 6-0 6-2
+		用于建立共享档案与目录
+	隐藏属性
+		chattr +a test  只能增加，不能删除
+		chattr +i test  不能对文档做任何操作
+
+		lsattr 显示
+	SUID
+		可以在执行时获得root的权限，仅对binary程序可用
+	SGID
+		可以在执行时，获得root的权限
+	which
+	whereis
+	find
+		find ./ -time -4  四天内动过的
+		find ./ -time +4  四天前之前动过的
+		find ./ -user qilianshan
+		find ./ -nouser 
+		find ./ -name 
+		find ./ -type 
+		find /usr/bin/ /usr/sbin/ -exec ls -l {} \; 找到后并执行,其中{}代表找到后的关键字
+		find / -size +1M
+		找到50k到60k之间的文件并输出
+		find ./ -size +50k -a -size -100k -exec ls -l {} \;
+		找到50k以上而且不属于root的文件
+		find ./ -size +50k -not -user root -exec ls -l {} \;
+
+	问题：目录-是什么意思
+	od
+	cat -n
+	 access time(atime), status time (ctime), modification time(mtime)
+
+fileSystem
+	superlock:记录filesystem的整体咨询，包括inode/block的总量，剩余量，文档系统格式的相关信息
+	inode:记录档案属性，一个档案占用一个inode
+	block:档案实际内容，档案太大会占用多个block
+
+	indexed allocation
+	FAT 链式
+
+	整个存储区会氛围多个block group，每个group内拥有自己的superblock,档案描述，区块对应表，InodeTable,Data Block
+
+	查看inode地址
+	ll -di / /etc /passwd
+
+	df 查看容量,用inode的方式,以及所挂载的partition
+	df -h 用容量单位的方式查看
+
+	du 查看当前目录下文件夹的大小
+	du -a 同时显示出文件和文件夹的大小
+	du -sm ../* 
+
+	ln -i /etc/crontab .crontab 硬链接
+	ln -s /etc/cronts .crontab 软链接
+
+	liblk 显示系统上的磁碟列表
+
+compress
+	.tar.tar.gz.tgz.gz.Z.bz2.xz
+
+	gzip -9 -c services > services.gz 压缩 1-9压缩等级 c会将压缩的资料输出
+	gzip -d services.gz 解压缩
+
+	bzip2 压缩比>gzip
+
+	xz 压缩比>bzip2
+
+	tar解压
+	tar -zcv -f services.gz services
+	tar -ztv -f services
+	tar -zxv -f services.gz
+
+	xfsdump 备份完整的档案系统
+	xfsrestore 还原系统
+
+	dd if="input_file" of=""
+
+vi
+	编辑器模式：
+		command mode
+		insert mode
+		command-line mode
+	[Ctrl] + [f]	螢幕『向下』移動一頁，相當於 [Page Down]按鍵 (常用)
+	[Ctrl] + [b]	螢幕『向上』移動一頁，相當於 [Page Up] 按鍵 (常用)
+	0 或功能鍵[Home]	這是數字『 0 』：移動到這一列的最前面字元處 (常用)
+	gg	移動到這個檔案的第一列，相當於 1G 啊！ (常用)
+	n<Enter>	n 為數字。游標向下移動 n 列(常用)
+	u	復原前一個動作。(常用)
+	[Ctrl]+r	重做上一個動作。(常用)
+	$ 或功能鍵[End]	移動到這一列的最後面字元處(常用)
+	G	移動到這個檔案的最後一列(常用)
+	gg	移動到這個檔案的第一列，相當於 1G 啊！ (常用)
+	n<Enter>	n 為數字。游標向下移動 n 列(常用
+	/word	向游標之下尋找一個名稱為 word 的字串。例如要在檔案內搜尋 vbird 這個字串，就輸入 /vbird 即可！ (常用)
+	:n1,n2s/word1/word2/g	n1 與 n2 為數字。在第 n1 與 n2 列之間尋找 word1 這個字串，並將該字串取代為 word2 ！舉例來說，在 100 到 200 列之間搜尋 vbird 並取代為 VBIRD 則：『:100,200s/vbird/VBIRD/g』。(常用)
+	:1,$s/word1/word2/g	從第一列到最後一列尋找 word1 字串，並將該字串取代為 word2 ！(常用)
+	dd	刪除游標所在的那一整列(常用)
+	ndd	n 為數字。刪除游標所在的向下 n 列，例如 20dd 則是刪除 20 列 (常用)
+	nyy	n 為數字。複製游標所在的向下 n 列，例如 20yy 則是複製 20 列(常用)
+	p, P	p 為將已複製的資料在游標下一列貼上，P 則為貼在游標上一列！ 舉例來說，我目前游標在第 20 列，且已經複製了 10 列資料。則按下 p 後， 那 10 列資料會貼在原本的 20 列之後，亦即由 21 列開始貼。但如果是按下 P 呢？ 那麼原本的第 20 列會被推到變成 30 列。 (常用)
+	u	復原前一個動作。(常用)
+	[Ctrl]+r	重做上一個動作。(常用)
+	:wq	儲存後離開，若為 :wq! 則為強制儲存後離開 (常用)ls
+
+	块级编辑
+		v选择区域
+		y复制
+		d删除选中块儿
+		p粘贴选中块儿
+		ctrl+v
+	多文本编辑
+		ctrl+n
+		ctrl+f
+	多窗口编辑
+		:sp
+		ctrl+w+j
+		ctrl+w+k
+shell
+	种类
+		/bin/sh
+		/bin/bash
+		/bin/tcsh
+		/bin/csh
+	Bash shell功能
+		history  记忆使用过的指令
+		tab 档案补全功能
+		alias 给命令取别名 alias lm='ls -al'
+		job control,forground background 工作控制，前后背景
+		shell script 程序化脚本
+	查询帮助
+		man bash
+		type cd
+	命令行操作
+		ctrl+u/k 删除光标前/后
+		ctrl+a/e 移动光标至头/尾
+	变量
+		name=ccc
+		echo $name  设置与使用环境变量
+		ls -ld `locate crontab` 反引号代表先执行引号内的内容
+		env 查看环境变量
+		set 查看所有变量
+		变量详细
+			locale
+			RANDOM
+		变量作用范围
+		read
+		declare
+			-x export to homevar
+			-r readonly
+			-i int
+		array
+			arr[1]=value
+		ulimit
+			-a 限制用户的使用
+			${變數#關鍵字}
+			${變數##關鍵字}	若變數內容從頭開始的資料符合『關鍵字』，則將符合的最短資料刪除
+			若變數內容從頭開始的資料符合『關鍵字』，則將符合的最長資料刪除
+			${變數%關鍵字}
+			${變數%%關鍵字}	若變數內容從尾向前的資料符合『關鍵字』，則將符合的最短資料刪除
+			若變數內容從尾向前的資料符合『關鍵字』，則將符合的最長資料刪除
+			${變數/舊字串/新字串}
+			${變數//舊字串/新字串}	若變數內容符合『舊字串』則『第一個舊字串會被新字串取代』
+			若變數內容符合『舊字串』則『全部的舊字串會被新字串取代』
+		常用设定
+			new_var=${new_var-ccc}  默认情况下会设置成ccc
+	alias
+		alias cls='clear'
+		unalias lm='ls -al|more'
+	bash欢迎信息
+		/etc/issue
+		/etc/motd
+	History
+		number 查看
+		-c
+		-w
+	PATH
+		login shell：
+			/etc/profile
+			~/.bash_profile
+		no-login shell:
+			~/.bashrc
+	终端机设定
+		stty -a  查看终端机设置
+		stty erase ^h
+			设置回退快捷键
+			ctrl+s 锁死
+			ctrl+q 开始	
+		元字符
+			* ? [] [-] [^] 于正则表达时
+		bash特殊符号
+			# 注释
+			\ 跳脱
+			| 两条管线命令
+			; 分割
+			~ 自家目录
+			$ 变量前
+			& job control
+			! 非
+			/ 路径分割符号
+
+
+
+
+
+
+
+
+			
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+<script>
+	var minDistance=function(word1,word2){
+		//声明表儿的长度
+		var status=new Array(word1.length+1);
+		for(var i=0,len=status.length;i<len;i++){
+			status[i]=new Array(word2.length+1);
+			status[i][0]=i;
+		}
+		for(var i=0;i<status[0].length;i++){
+			status[0][i]=i;
+		}
+		//初始化
+		for(var i=1;i<status.length;i++){
+			for(var j=1;j<status[i].length;j++){
+				var one=status[i-1][j-1]+Number(!(word1[i-1]==word2[j-1]));
+				var two=status[i-1][j]+1;
+				var three=status[i][j-1]+1;
+				status[i][j]=Math.min(one,two,three);
+			}
+		}
+		//打log
+		log(status);
+		return status[word1.length][word2.length];
+	}	
+	function log(status){
+		for(var i=0;i<status[0].length;i++){
+			console.log(status[i]);
+		}
+	}
+</script>
