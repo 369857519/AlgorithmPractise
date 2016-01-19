@@ -257,7 +257,7 @@ vi
 		:sp
 		ctrl+w+j
 		ctrl+w+k
-shell
+BASH
 	种类
 		/bin/sh
 		/bin/bash
@@ -339,6 +339,39 @@ shell
 			& job control
 			! 非
 			/ 路径分割符号
+	STDOUT
+	STDERR
+		ll / > /tmp/log  覆盖的方式
+		ll / >> /tmp/log  累加的方式
+		mkdir /cc/test 2> /tmp/log
+		2>> 输出错误
+		find /home -name .bashrc > list_right 2> list_error
+		find /home -name .bashrc &> list 将错误和正确的信息全部写入
+		cat > catfile 会创建文件
+		ll catfile ~/.bashrc
+		cat > catfile < ~/.bashrc 输出流到catfile，输入流从~/.bashrc开始
+	指令特殊符号
+		;不考虑相关性的多指令执行
+		&&  如果第一个为true，则继续往下执行
+			ls /tmp/abc && touch /tmp/abc/hehe
+		||  如果第一个为false，则继续往下执行
+			ls /tmp/abc || mkdir /tmp/abc 如果目录不存在，就建立目录
+		ls /tmp/abc || mkdir /tmp/abc && touch /tmp/abc/hehe
+	pipe
+		可以处理前一个命令的standard output,并忽略standard error
+		截取命令 cut与grep
+			echo $PATH|cut -d ':' -c :
+			echo $PATH|cut -c 12-
+			last|grep 'root' 包括root
+			last|grep -v 'root' 不包括root
+			vi /pass|uniq 选出单独的显示
+			last | tee last.list | cut -d " " -f1  tee 将stdin存入文件，同时传给下一个pipe
+			tr [-ds] SET1 删除SET1
+			col 将tab换成对等的空白符
+			join 如果相关的话就把两个内容和起来
+			paste 直接粘贴
+			expand 将tab转换成空白键
+			
 
 
 
