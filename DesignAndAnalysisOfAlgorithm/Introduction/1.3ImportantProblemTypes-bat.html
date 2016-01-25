@@ -1,0 +1,93 @@
+<script>
+	//1.3.3
+	//string match
+	//INPUT:stringA,stringB,find stringA in stringB
+	//OUTPUT:index of stringB where the index of the first letter of stringA contains in stringB
+	function stringMatch(stringA,strignB){
+		for(var i=0;i<strignB.length;i++){
+			var temp=i;
+			for(var j=0;j<stringA.length;j++){
+				if(strignB[temp]==stringA[j]){
+					temp++;
+				}else{
+					break;
+				}
+				if(j==stringA.length-1){
+					return i;
+				}
+			}
+		}
+	}
+
+	//1.3.4
+	//koningsberg bridges
+	//a
+		//we have four vertex v1,v2,v3,v4 and seven non-direction edges
+		//two between v1 and v2
+		//two between v1 and v3
+		//one between v2 and v4
+		//one between v3 and v4
+		//one between v1 and v4
+		//we need to traverse all the edges and return to the vertex which we are started from
+	//b
+		//no it doesn't have a solution
+		//one new bridge will be required
+		//I think if we want to traverse all the path and return, there must be at least (n-1)*2 edges
+		//and there should be two edges between vertexs once they are linked
+	//1.3.5
+	//founded
+
+	//1.3.6
+	//a
+		//There are many factors should be considered exactly In real-life
+		//1 best route should have the most reasonable price
+		//2 spend least time
+		//3 go through least miles 
+	//b
+		//first we should make stations as vertex
+		//subway lines as edges
+		//every edges has three weights of time,miles and price
+		//then we found shortest way count by weights
+
+	//1.3.7
+	//a
+		//
+	//1.3.8
+		//a make every block as a vertice
+			//if two neighbors are connected,they are linked. then we get a big map,and DFT this map and color it will be ok
+		//b when color each block
+			//notice all the neighbors, on the contidion of diffderent from all the neighbors
+			//color it with the colors which already used first
+			//if can't,use come new color
+			//then we'll get the answer
+	//1.3.9
+		//INPUT:n sets of (X,Y),(a,b),(c,d)...(Xn,Yn)
+		//OUTPUT:BOOLEAN,if all of the pointes are on the same circumference
+		//Choose three point as (a,b) (c,d) (e,f)
+		//base on three formula
+		//(a-x)^2+(b-y)^2=R^2
+		//(c-x)^2+(d-y)^2=R^2
+		//(e-x)^2+(f-y)^2=R^2
+
+		//we can get the answer
+		//A=(a-c)(a-e)+(a-c)(d^2-f^2)/(e-c)+d^2-b^2
+		//B=2d-2b+(a-c)(2f-2d)/(e-c)
+		//Y=A/B
+		//C=(a-c)(a+e)+(a-c)(d^2-f^2)/(e-c)
+		//D=2a-2c
+		//E=(c-a)(2f-2d)/(e-c)*Y
+		//X=(E+C)/D
+
+	//1.3.10
+		//INPUT: two point (x1,y1) (x2,y2)
+		//OUTPUT: BOOLEAN
+		//get formula of line by two point of one segments
+		//line one:(a,b) (c,d)
+		//(x-a)/(y-b)=(a-c)/(b-d)
+		//line two:(e,f) (g,h)
+		//(x-e)/(y-f)=(e-g)/(f-h)
+		//D1=(a-b)/(c-d)
+		//D2=(e-f)/(g-h)
+		//y=(b*D1-f*d2-a+e)/D1-D2
+		//X=(y-f)*D2+e
+</script>
