@@ -61,10 +61,142 @@
 			//dequeue:
 				//INPUT:node x
 				//if node has right child,find node's right child 
-				//if not,delete node x,node x's right child as node.node's left child as node's right child's left child
+				//if not,delete node x,node x's left child as node.
 			//enqueue:
 				//INPUT:node
 				//
+				function Node(value,left,right){
+					// Node's value
+					this.value=value;
+					// node's left child
+					this.left=null;
+					// node's right child
+					this.right=null;
+					// node's additional value
+					this.count=1;
+				}
+				//enqueue
+				function add(node,value){
+					// if node is null
+					if(node==null){
+						node=new Node(value);
+						return node;
+					}
+
+					// if value is bigger than this node's value
+					if(value<node.value){
+						if(node.left){
+							add(node.left,value);
+						}else{
+							node.left=new Node(value);
+						}
+					}
+
+					// if value is smaller than this node's value
+					if(value>node.value){
+						if(node.right){
+							add(node.right,value);
+						}else{
+							node.right=new Node(value);
+						}
+					}
+
+					//if value is equal to this node's value
+					if(node==node.value){
+						node.count++;
+						return;
+					}
+				}
+
+				var arr=[9,5,12,1,7,10,4];
+				var root=new Node(arr[0]);
+				for(var i=1;i<arr.length;i++){
+					add(root,arr[i]);
+				}
+				// find min
+				function findMin(node){
+					while(node.left){
+						node=node.left;
+					}
+					return node;
+				}
+				//dequque
+				function dequeue(){
+					var max=root;
+					var parent=max;
+					while(max.right){
+						parent=max;
+						max=max.right;
+					}
+					var value=max.value;
+					if(max==root){
+						root=max.left;
+					}else if(max.left){
+						var l=max.left;
+						max.value=l.value;
+						max.left=l.left;
+						max.right=l.right;
+						delete l;
+					}else{
+						delete parent.right;
+					}
+					return value;
+				}
+				//dequeue
+				function deleteNode(value,node){
+					if(node==null){
+						return null;
+					}
+					// if node's value is bigger than value
+					if(node.value>value){
+						dequeue(value,node.left);
+					}
+					// if node's value is smaller than value
+					if(node.value<value){
+						dequeue(value,node.right);
+					}
+
+					if(node.value==value){
+						// if there's two same elements,decrease count
+						if(node.count!=1){
+							node.count--;
+						}else{
+							// if this node has two children
+							if(node.right&&node.left){
+								var parent=node,succ=node.right;
+								while(succ.left){
+									parent=succ;
+									succ=succ.left;
+								}
+								node.value=succ.value;
+								//if succ doesn't have left child
+								// parent will equal to node
+								if(parent==node){
+									parent.right=succ.right;
+								}else if(parent!=node){
+									parent.left=succ.right;
+								}
+							}else if(!node.right&&!node.left){
+								delete node;
+							}else if(node.right&&!node.left){
+								var r=node.right;
+								node.value=node.right.value;
+								node.right=r.right;
+								node.left=r.left;
+								delete r;
+							}else if(node.left&&!node.right){
+								var l=node.left;
+								node.value=node.left.value;
+								node.right=l.right;
+								node.left=l.left;
+								delete l;
+							}
+						}
+						return true;
+					}
+				}
+
+
 	//1.4.8
 		//
 	//1.4.9
