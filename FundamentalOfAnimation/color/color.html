@@ -1,0 +1,99 @@
+<html>
+<head>
+	<title>color</title>
+	<meta name="viewport"
+          content="width=320,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="colorMatrix.css">
+</head>
+<body>
+<div class="colorMatrix">
+</div>
+<script>
+function sleep(numberMillis) {
+    var now = new Date();
+    var exitTime = now.getTime() + numberMillis;
+    while (true) {
+        now = new Date();
+        if (now.getTime() > exitTime)
+            return;
+    }
+}
+	var colorArray=[
+		[232,56,67],
+		[239,147,187],
+		[253,224,165],
+		[248,183,61],
+		[214,0,111]
+	]
+	var matrix=[];
+	var bredthFirstArray=[];
+	var colorMatrixParent=document.querySelector('.colorMatrix');
+	colorMatrix={
+		matrix:function(){
+			for(var i=0;i<20;i++){
+				matrix[i]=[];
+				for(var j=0;j<20;j++){
+					var div=document.createElement('div');
+					div.id=i+'AND'+j;
+					div.style.position='absolute';
+					div.style.left=i*5+'%';
+					div.style.top=j*5+'%';
+					div.style.height='5%';
+					div.style.width='5%';
+					colorMatrixParent.appendChild(div);
+					div=null;
+					matrix[i][j]=0;
+				}
+			}
+		},
+		generateElement:function(){
+			while(bredthFirstArray.length!=0){
+				var curCor=bredthFirstArray.pop();
+				document.getElementById(curCor.join('AND')).style.backgroundColor='#000';
+				if(matrix[curCor[0]+1]&&matrix[curCor[0]+1][curCor[1]]==0&&matrix[curCor[0]+1][curCor[1]]!=1){
+					bredthFirstArray.push([curCor[0]+1,curCor[1]]);
+					matrix[curCor[0]+1][curCor[1]]=1;
+				}
+				if(matrix[curCor[0]-1]&&matrix[curCor[0]-1][curCor[1]]==0&&matrix[curCor[0]-1][curCor[1]]!=1){
+					bredthFirstArray.push([curCor[0]-1,curCor[1]]);
+					matrix[curCor[0]-1][curCor[1]]=1;
+				}
+				if(matrix[curCor[0]]&&matrix[curCor[0]][curCor[1]+1]==0&&matrix[curCor[0]][curCor[1]+1]!=1){
+					bredthFirstArray.push([curCor[0],curCor[1]+1]);
+					matrix[curCor[0]][curCor[1]+1]=1;
+				}
+				if(matrix[curCor[0]]&&matrix[curCor[0]][curCor[1]-1]==0&&matrix[curCor[0]][curCor[1]-1]!=1){
+					bredthFirstArray.push([curCor[0],curCor[1]-1]);
+					matrix[curCor[0]][curCor[1]-1]=1;
+				}
+			}
+		},
+		generatePosition:function(){
+
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded',function(){
+		colorMatrix.matrix();
+		bredthFirstArray[0]=[0,0];
+		colorMatrix.generateElement();
+	})
+
+	console.log(0Xff55f3);
+	var hex=(16733683).toString(16);
+	console.log(hex);
+
+	var hexColor='#'+(16733683).toString(16);
+	var color= window.parseInt(hexColor.slice(1),16);
+	console.log(color);
+
+	var color=0Xff<<16|0x55<<8|0xf3;//八位二进制相当于1位十六进制
+
+	//提取三原色
+	red=color>>16&0xff;
+	green=color>>8&0xff;
+	blue=color
+
+</script>
+</body>
+</html>
