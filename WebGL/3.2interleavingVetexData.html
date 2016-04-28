@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Draws a triangle</title>
+		<meta charset="utf-8">
+		<script src="js/webgl-debug.js"></script>
+		<script src="js/shader.js"></script>
+		<script id="shader-vs" type="x-shader/x-vertex">
+			attribute vec3 aVertexPosition;
+			attribute vec4 aVertexColor;
+
+			varying vec4 vColor;
+
+			void main(){
+				vColor=aVertexColor;
+				gl_Position=vec4(aVertexPosition,1.0);
+			}
+		</script>
+		<script id="shader-fs" type="x-shader/x-fragment">
+			precision mediump float;
+
+			varying vec4 vColor;
+			void main(){
+				gl_FragColor = vColor;
+			}
+		</script>
+		<script id="shader-fsc" type="x-shader/x-fragment"></script>
+		<script type="text/javascript">
+			var gl;
+			var canvas;
+			var shaderProgram;
+			var hexagonVertexBuffer;
+			var triangleVertexBuffer;
+			var triangleVertexColorBuffer;
+			var stripVertexBuffer;
+			var stipElementBuffer;
+
+			
+
+			function setupBuffers(){
+				//hexagonVertexBuffer
+				var hexagonVertices=[
+					-0.3,0.6,0.0,
+					-0.4,0.8,0.0,
+					-0.6,0.8,0.0,
+					-0.7,0.6,0.0,
+					-0.6,0.4,0.0,
+					-0.4,0.4,0.0,
+					-0.3,0.6,0.0,
+				];
+				hexagonVertexBuffer=bindBuffer(hexagonVertices,3,7);
+
+				//triangleVertex
+				var triangleVertices=[
+					0.3,0.4,0.0,
+					0.7,0.4,0.0,
+					0.5,0.8,0.0
+				];
+				triangleVertexBuffer=bindBuffer(triangleVertices,3,3);
+
+				//trianglecolor
+				var colors=[
+					1.3,0.0,0.0,1.0,
+					0.0,1.0,0.0,1.0,
+					0.0,0.0,.0,.0
+				];
+				triangleVertexColorBuffer=bindBuffer(colors,4,3);
+
+				//strip
+				var stripVertices=[
+					-0.5,  0.2,  0.0, //v0
+			        -0.4,  0.0,  0.0, //v1
+			        -0.3,  0.2,  0.0, //v2
+			        -0.2,  0.0,  0.0, //v3
+			        -0.1,  0.2,  0.0, //v4
+			         0.0,  0.0,  0.0, //v5
+			         0.1,  0.2,  0.0, //v6
+			         0.2,  0.0,  0.0, //v7
+			         0.3,  0.2,  0.0, //v8
+			         0.4,  0.0,  0.0, //v9
+					 0.5,  0.2,  0.0, //v10
+					 // start second strip
+					-0.5, -0.3,  0.0, //v11
+					-0.4, -0.5,  0.0, //v12
+					-0.3, -0.3,  0.0, //v13
+					-0.2, -0.5,  0.0, //v14
+					-0.1, -0.3,  0.0, //v15
+					 0.0, -0.5,  0.0, //v16
+					 0.1, -0.3,  0.0, //v17
+					 0.2, -0.5,  0.0, //v18
+					 0.3, -0.3,  0.0, //v19
+					 0.4, -0.5,  0.0, //v20
+					 0.5, -0.3,  0.0  //v21
+				];
+				stripVertexBuffer=bindBuffer(stripVertices,3,22);
+
+				//stripIndices
+				var indices=[0,1,2,3,4,5,6,7,8,9,10,10,10,11,11,12,13,14,15,16,17,18,19,20,21];
+				stripElementBuffer=bindElementArrayBuffer(indices,25);
+			}
+
+			function draw(){
+				gl.viewport(0,0,gl.viewportWidth,gl.viewportHeight);
+				gl.clear(gl.COLOR_BUFFER_BIT);
+
+				//draw hexagon
+				gl.disableVertexAttribArray(shaderProgram.vertexColorAttribute);
+				gl.vertexAttrib4f(shaderProgram.vertexColorAttribute,0.0,0.0,0.0,1.0);
+
+				gl.bindBuffer(gl.ARRAY_BUFFER,hexagonVertexBuffer);
+				gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,hexagonVertexBuffer.itemSize,gl.FLOAT,false,0,0);
+				gl.drawArrays(gl.LINE_STRIP,0,hexagonVertexBuffer.numberOfItems);
+
+				//draw the independent triangle
+				gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
+
+				gl.bindBuffer(gl.ARRAY_BUFFER,triangleVertexBuffer);
+				gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,triangleVertexBuffer.itemSize,gl.FLOAT,false,0,0);
+
+				gl.bindBuffer(gl.ARRAY_BUFFER,triangleVertexColorBuffer);
+				gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,triangleVertexColorBuffer.itemSize,gl.FLOAT,false,0,0);
+
+				gl.drawArrays(gl.TRIANGLES,0,triangleVertexBuffer.numberOfItems);
+
+				// //draw strip
+				gl.disableVertexAttribArray(shaderProgram.vertexColorAttribute);
+				gl.bindBuffer(gl.ARRAY_BUFFER,stripVertexBuffer);
+				gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,stripVertexBuffer.itemSize,gl.FLOAT,false,0,0);
+
+				gl.vertexAttrib4f(shaderProgram.vertexColorAttribute,1.0,1.0,0.0,1.0);
+				gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,stripElementBuffer);
+
+				gl.drawElements(gl.TRIANGLE_STRIP,25,gl.UNSIGNED_SHORT,0);
+				gl.vertexAttrib4f(shaderProgram.vertexColorAttribute,0.0,0.0,0.0,1.0);
+
+				//draw 
+				gl.drawArrays(gl.LINE_STRIP,0,11);
+				gl.drawArrays(gl.LINE_STRIP,11,11);
+			}
+
+			function startup(){
+				//get canvas and context
+				canvas=document.querySelector('.myCLCanvas');
+				gl=WebGLDebugUtils.makeDebugContext(createGLContext(canvas));
+				//load cource code into shader and compile
+				setupShaders(true);
+				setupBuffers();
+				//culfase
+				gl.frontFace(gl.CCW);
+				gl.enable(gl.CULL_FACE);
+				gl.cullFace(gl.BACK);
+
+				//clear color
+				gl.clearColor(1.0,  1.0,  1,  1);
+				//connect buffer to shader
+				draw();
+			}
+			document.addEventListener('DOMContentLoaded',function(event){
+				startup();
+			})
+		</script>
+		<body>
+			<canvas class="myCLCanvas" width="500" height="500"></canvas>
+		</body>
+	</head>
+</html>

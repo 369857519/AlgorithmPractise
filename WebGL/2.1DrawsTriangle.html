@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Draws a triangle</title>
+		<meta charset="utf-8">
+		<script src="js/webgl-debug.js"></script>
+		<script src="js/shader.js"></script>
+		<script id="shader-vs" type="x-shader/x-vertex">
+			attribute vec3 aVertexPosition;
+			void main(){
+				gl_Position=vec4(aVertexPosition,1.0);
+			}
+		</script>
+		<script id="shader-fs" type="x-shader/x-fragment">
+			precision mediump float;
+			void main(){
+				gl_FragColor = vec4(0., 1., 0., 1.);
+			}
+		</script>
+		<script id="shader-fsc" type="x-shader/x-fragment"></script>
+		<script type="text/javascript">
+			var gl;
+			var canvas;
+			var shaderProgram;
+			var vertexBuffer;
+
+			function loadShader(type,shaderSource){
+				var shader=gl.createShader(type);
+				gl.shaderSource(shader,shaderSource);
+				gl.compileShader(shader);
+
+				if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){
+					console.log("Error compiling shader"+gl.getShaderInfoLog(shader));
+					gl.deleteShader(shader);
+					return null;
+				}
+
+				return shader;
+			}
+
+			function generateColorBuffer(){
+				var colors = [
+				    1.0,  1.0,  1.0,  1.0,    // white
+				    1.0,  0.0,  0.0,  1.0,    // red
+				    0.0,  1.0,  0.0,  1.0,    // green
+				    0.0,  0.0,  1.0,  1.0     // blue
+				  ];
+				  
+				  squareVerticesColorBuffer = gl.createBuffer();
+				  gl.bindBuffer(gl.ARRAY_BUFFER, squareVerticesColorBuffer);
+				  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+			}
+
+			function setupBuffers(){
+				//bind buffer and send data
+				//set up buffer and load vertex
+				vertexBuffer=gl.createBuffer();
+				gl.bindBuffer(gl.ARRAY_BUFFER,vertexBuffer);
+				var triangleVertices=[
+					0.0,0.5,.9,
+					-0.5,-0.5,.9,
+					0.5,-0.5,.9
+				];
+				gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(triangleVertices),gl.STATIC_DRAW);
+				vertexBuffer.itemSize=3;
+				vertexBuffer.numberOfItems=3;
+			}
+
+			function draw(){
+				gl.viewport(0,0,gl.viewportWidth/2,gl.viewportHeight/2);
+				gl.clear(gl.COLOR_BUFFER_BIT);
+				//items size attr poisnt buffer and draw
+				gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,vertexBuffer.itemSize,gl.FLOAT,false,0,0);
+				gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+				gl.drawArrays(gl.TRIANGLES,0,vertexBuffer.numberOfItems);
+			}
+
+			function startup(){
+				//get canvas and context
+				canvas=document.querySelector('.myCLCanvas');
+				gl=WebGLDebugUtils.makeDebugContext(createGLContext(canvas));
+				//load cource code into shader and compile
+				setupShaders();
+				setupBuffers();
+				//clear color
+				gl.clearColor(0.0,  0.0,  0.0,  1.0);
+				//connect buffer to shader
+				draw();
+			}
+			document.addEventListener('DOMContentLoaded',function(event){
+				startup();
+			})
+		</script>
+		<body>
+			<canvas class="myCLCanvas" width="500" height="500"></canvas>
+		</body>
+	</head>
+</html>
