@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Draws a triangle</title>
+		<meta charset="utf-8">
+		<script src="js/webgl-debug.js"></script>
+		<script src="js/shader.js"></script>
+		<script src="js/mjs.js"></script>
+		<script>
+			function converToString(array){
+				var stringRep='';
+				for(var i=0;i<array.length;i++){
+					var stringRep=stringRep+array[i]+' ';
+				}
+				return stringRep;
+			}
+
+			function testMjsJsLibrary(){
+				var u=V3.$(1,2,3);
+				var v=V3.$(4,5,6);
+
+				var s=V3.add(u,v);
+				console.log(converToString(s));
+
+				var d=V3.dot(u,v);
+				console.log(d);
+
+				var c=V3.cross(u,v);
+				console.log(converToString(c));
+
+				var M=M4x4.$(
+					1,0,0,0,
+					0,1,0,0,
+					0,0,1,0,
+					2,3,4,1
+					)
+				var I=M4x4.$(
+					1,0,0,0,
+					0,1,0,0,
+					0,0,1,0,
+					0,0,0,1
+					)
+
+				var MI=M4x4.mul(M,I);
+				console.log(converToString(MI));
+
+				var T=M4x4.makeTranslate3(2,3,4);
+				console.log(converToString(T));
+			}
+
+			document.addEventListener('DOMContentLoaded',function(event){
+				testMjsJsLibrary();
+			})
+		</script>
+		<body>
+			<canvas class="myCLCanvas" width="500" height="500"></canvas>
+		</body>
+	</head>
+</html>
