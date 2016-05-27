@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Draws a triangle</title>
+		<meta charset="utf-8">
+		<script src="js/webgl-debug.js"></script>
+		<script src="js/shader.js"></script>
+		<script src="js/gl-matrix.js"></script>
+		<script>
+			function setupCubeBuffers(){
+				var cubeVertexPosition=[
+					//Front face
+					1.0,1.0,1.0,
+					-1.0,1.0,1.0,
+					-1.0,1.0,1.0,
+					1.0,-1.0,1.0, //v3
+
+					//Backface
+					1.0,1.0,-1.0,
+					-1.0,1.0,-1.0,
+					-1.0,-1.0,-1.0,
+					1.0,-1.0,-1.0,
+
+					//Left face
+					-1.0,1.0,1.0,
+					-1.0,1.0,-1.0,
+					-1.0,-1.0,-1.0,
+					-1.0,-1.0,-1.0,
+
+					//Right face
+					1.0,1.0,1.0,
+					1.0,-1.0,1.0,
+					1.0,-1.0,-1.0,
+					1.0,1.0,-1.0,
+
+					//top face
+					1.0,1.0,1.0,
+					1.0,1.0,-1.0,
+					-1.0,1.0,-1.0,
+					-1.0,1.0,1.0,
+
+					//Bottom face
+					1.0,-1.0,1.0,
+					1.0,-1.0,-1.0,
+					-1.0,-1.0,-1.0,
+					-1.0,-1.0,1.0
+				];
+			}
+			document.addEventListener('DOMContentLoaded',function(event){
+				testglMatrixJsLibrary();
+			})
+		</script>
+		<body>
+			<canvas class="myCLCanvas" width="500" height="500"></canvas>
+		</body>
+	</head>
+</html>
