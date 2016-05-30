@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Draws a triangle</title>
+		<meta charset="utf-8">
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			var data=[
+				{expense:10,category:'Retail'},
+				{expense:15,category:'Gas'},
+				{expense:30,category:'Retail'},
+				{expense:50,category:'Dining'},
+				{expense:10,category:'Retail'},
+				{expense:15,category:'Gas'},
+				{expense:30,category:'Retail'},
+				{expense:50,category:'Dining'},
+				{expense:10,category:'Retail'},
+				{expense:15,category:'Gas'},
+				{expense:30,category:'Retail'},
+				{expense:50,category:'Dining'}
+			];
+
+			function render(data,category){
+				d3.select('body').selectAll('div.h-bar')
+				.data(data)
+				.enter()
+				.append('div')
+				.attr('class','h-bar')
+				.append('span');
+
+				d3.select('body').selectAll('div.h-bar')
+				.data(data)
+				.exit().remove();
+
+				d3.select('body').selectAll('div.h-bar')
+				.data(data)
+				.attr('class','h-bar')
+				.style('width',function(d){
+					return (d.expense*5)+'px';
+				})
+
+				d3.select('body').selectAll('div.h-bar')
+				.filter(function(d,i){
+					return d.category==category;
+				}).classed('selected',true);
+			}
+
+			render(data);
+
+			function select(category){
+				render(data,category);
+			}
+		</script>
+		<body>
+			<div class="control-group">
+			</div>
+		</body>
+	</head>
+</html>
