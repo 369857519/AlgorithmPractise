@@ -57,7 +57,7 @@
 			}
 
 			function pushModelViewMatrix(){
-				var copyToPush=mat4.create(modelViewMatrix);
+				var copyToPush=mat4.clone(modelViewMatrix);
 				modelViewMatrixStack.push(copyToPush);
 			}
 
@@ -149,12 +149,15 @@
 				gl.vertexAttrib4f(shaderProgram.vertexColorAttribute,r,g,b,a);
 				//draw the floor
 				gl.bindBuffer(gl.ARRAY_BUFFER,floorVertexPositionBuffer);
+
 				gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,
 					floorVertexPositionBuffer.itemSize,gl.FLOAT,false,0,0);
 				gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,floorVertexIndexBuffer);
-				gl.drawElements(gl.TRIANGLES,floorVertexIndexBuffer.numberOfItems,
+				gl.drawElements(gl.TRIANGLE_FAN,floorVertexIndexBuffer.numberOfItems,
 					gl.UNSIGNED_SHORT,0);
+				//gl.TRIANGLES  gl.tri
 			}
+
 
 			function drawCube(r,g,b,a){
 				gl.disableVertexAttribArray(shaderProgram.vertexColorAttribute);
@@ -196,9 +199,7 @@
 			function draw(){
 				gl.viewport(0,0,gl.viewportWidth,gl.viewportHeight);
 				gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
-				mat4.perspective(projectionMatrix,20,gl.viewportWidth/gl.viewportHeight,0.1,100.0);//problem1
-				//test
-				// mat4.set(projectionMatrix,1.7320507764816284, 0, 0, 0, 0, 1.7320507764816284, 0, 0, 0, 0, -1.0020020008087158, -1, 0, 0, -0.20020020008087158, 0);
+				mat4.perspective(projectionMatrix,19.9,gl.viewportWidth/gl.viewportHeight,0.1,100.0);//problem1
 				//test
 				mat4.identity(modelViewMatrix);
 				mat4.lookAt(modelViewMatrix,[8,5,-10],[0,0,0],[0,1,0]);
