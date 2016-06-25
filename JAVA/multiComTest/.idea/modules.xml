@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/multiCom-core/multiCom-core.iml" filepath="$PROJECT_DIR$/multiCom-core/multiCom-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiCom-entity/multiCom-entity.iml" filepath="$PROJECT_DIR$/multiCom-entity/multiCom-entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiCom-web/multiCom-web.iml" filepath="$PROJECT_DIR$/multiCom-web/multiCom-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiComTest.iml" filepath="$PROJECT_DIR$/multiComTest.iml" />
+    </modules>
+  </component>
+</project>
