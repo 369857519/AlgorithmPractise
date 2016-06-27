@@ -1,19 +1,124 @@
 package com.multiCom.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.multiCom.entity.User;
+import com.multiCom.util.ConnectionFactory;
 /**
  * Created by qilianshan on 16/6/16.
  */
 public class UserDAO {
-//    public void save(Connection conn,User user) throws SQLException;
+    public ArrayList<User> getList(){
+        ArrayList<User> arr=new ArrayList<User>();
+        Connection conn=ConnectionFactory.getInstance().makeConnection();
+        //Sql 执行器对象
+        PreparedStatement preStat=null;
+        ResultSet reSet=null;
+        try {
+            String sql="select * from tbl_user";
+            preStat=conn.prepareStatement(sql);
+            reSet= preStat.executeQuery();
+            while (reSet.next()){
+                User user=new User();
+                user.setId(reSet.getInt("ID"));
+                user.setName(reSet.getString("name"));
+                user.setEmail(reSet.getString("Email"));
+                user.setPassword(reSet.getString("Password"));
+                arr.add(user);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            ConnectionFactory.colseRes(reSet,preStat,conn);
+        }
+        return arr;
+    }
+
+    public boolean insert (User user){
+        Connection conn=ConnectionFactory.getInstance().makeConnection();
+        //Sql 执行器对象
+        PreparedStatement preStat=null;
+
+        String sql="insert into tbl_user(name,password,email) values (\""
+                +user.getName()+"\",\""
+                +user.getEmail()
+                +"\",\""+user.getPassword()+"\");";
+        try{
+            preStat=conn.prepareStatement(sql);
+            if(preStat.execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            ConnectionFactory.colseRes(preStat,conn);
+        }
+        return false;
+    }
+
+    public boolean update (User user){
+        Connection conn=ConnectionFactory.getInstance().makeConnection();
+        //Sql 执行器对象
+        PreparedStatement preStat=null;
+
+        String sql="update tbl_user set name='"+user.getName()
+                +"',email='"+user.getEmail()+"',password='"+user.getPassword()+"' where id="+
+                user.getId()+";";
+        try{
+            preStat=conn.prepareStatement(sql);
+            if(preStat.executeUpdate()>0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            ConnectionFactory.colseRes(preStat,conn);
+        }
+        return false;
+    }
+
+    public boolean delete(Integer ID){
+        Connection conn=ConnectionFactory.getInstance().makeConnection();
+        //Sql 执行器对象
+        PreparedStatement preStat=null;
+
+        String sql="delete from tbl_user where id="+ID;
+        try{
+            preStat=conn.prepareStatement(sql);
+            if(preStat.executeUpdate()>0){
+                return true;
+            }else {
+                return false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            ConnectionFactory.colseRes(preStat,conn);
+        }
+        return false;
+    }
+
+//    public static void main(String[] args){
+//        User insertUser=new User();
+//        insertUser.setName("lalal");
+//        insertUser.setEmail("fdsfds@fdsfds.com");
+//        insertUser.setPassword("ccc");
+//        insertUser.setId(10);
 //
-//    public void update(Connection conn,Long id,User user) throws  SQLException;
-//
-//    public void delete(Connection conn,User user) throws SQLException;
-//
-//    public ResultSet get(Connection conn, User user) throws SQLException;
+//        new UserDAO().insert(insertUser);
+////        new UserDAO().update(insertUser);
+//        new UserDAO().delete(2);
+//        ArrayList<User> arr=new UserDAO().getList();
+//        for(User user:arr){
+//            System.out.println(user.toString());
+//        }
+//    }
 }
