@@ -32,13 +32,11 @@ public class UserDAO {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            ConnectionFactory.colseRes(reSet,preStat,conn);
         }
         return arr;
     }
 
-    public boolean insert (User user){
+    public void insert (User user){
         Connection conn=ConnectionFactory.getInstance().makeConnection();
         //Sql 执行器对象
         PreparedStatement preStat=null;
@@ -49,20 +47,13 @@ public class UserDAO {
                 +"\",\""+user.getPassword()+"\");";
         try{
             preStat=conn.prepareStatement(sql);
-            if(preStat.execute()){
-                return true;
-            }else{
-                return false;
-            }
+            System.out.println(preStat.execute());
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            ConnectionFactory.colseRes(preStat,conn);
         }
-        return false;
     }
 
-    public boolean update (User user){
+    public void update (User user){
         Connection conn=ConnectionFactory.getInstance().makeConnection();
         //Sql 执行器对象
         PreparedStatement preStat=null;
@@ -72,20 +63,13 @@ public class UserDAO {
                 user.getId()+";";
         try{
             preStat=conn.prepareStatement(sql);
-            if(preStat.executeUpdate()>0){
-                return true;
-            }else{
-                return false;
-            }
+            System.out.println(preStat.execute());
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            ConnectionFactory.colseRes(preStat,conn);
         }
-        return false;
     }
 
-    public boolean delete(Integer ID){
+    public void delete(Integer ID){
         Connection conn=ConnectionFactory.getInstance().makeConnection();
         //Sql 执行器对象
         PreparedStatement preStat=null;
@@ -93,32 +77,25 @@ public class UserDAO {
         String sql="delete from tbl_user where id="+ID;
         try{
             preStat=conn.prepareStatement(sql);
-            if(preStat.executeUpdate()>0){
-                return true;
-            }else {
-                return false;
-            }
+            System.out.println(preStat.execute());
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            ConnectionFactory.colseRes(preStat,conn);
         }
-        return false;
     }
 
-//    public static void main(String[] args){
-//        User insertUser=new User();
-//        insertUser.setName("lalal");
-//        insertUser.setEmail("fdsfds@fdsfds.com");
-//        insertUser.setPassword("ccc");
-//        insertUser.setId(10);
-//
+    public static void main(String[] args){
+        User insertUser=new User();
+        insertUser.setName("lalal");
+        insertUser.setEmail("fdsfds@fdsfds.com");
+        insertUser.setPassword("ccc");
+        insertUser.setId(10);
+
 //        new UserDAO().insert(insertUser);
-////        new UserDAO().update(insertUser);
-//        new UserDAO().delete(2);
-//        ArrayList<User> arr=new UserDAO().getList();
-//        for(User user:arr){
-//            System.out.println(user.toString());
-//        }
-//    }
+//        new UserDAO().update(insertUser);
+        new UserDAO().delete(2);
+        ArrayList<User> arr=new UserDAO().getList();
+        for(User user:arr){
+            System.out.println(user.toString());
+        }
+    }
 }

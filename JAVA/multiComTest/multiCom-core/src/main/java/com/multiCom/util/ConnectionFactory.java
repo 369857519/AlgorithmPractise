@@ -50,35 +50,6 @@ public class ConnectionFactory {
         return conn;
     }
 
-    public static void colseRes(PreparedStatement preStat,Connection conn){
-        try{
-            if(preStat!=null){
-                preStat.close();
-            }
-            if(conn!=null){
-                conn.close();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public static void colseRes(ResultSet resSet,PreparedStatement preStat,Connection conn){
-        try{
-            if(resSet!=null){
-                resSet.close();
-            }
-            if(preStat!=null){
-                preStat.close();
-            }
-            if(conn!=null){
-                conn.close();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
 //    public static void main(String[] args) throws SQLException{
 //        Connection conn=ConnectionFactory.getInstance().makeConnection();
 //        System.out.println(conn.getAutoCommit());
