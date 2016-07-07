@@ -15,6 +15,16 @@ import java.util.ArrayList;
  * Created by qilianshan on 16/7/7.
  */
 public class HelloServlet extends HttpServlet{
+
+    //Servlet+Applet
+    //特殊的Java类
+    //Servlet用来处理Http
+
+    //关键三个步骤
+    //init()
+    //service()
+    //destroy()
+
     @Override
     public void init() throws ServletException {
         System.out.println("============init=============");
