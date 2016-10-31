@@ -25,6 +25,28 @@ public class HelloServlet extends HttpServlet{
     //service()
     //destroy()
 
+    //servlet里的包
+
+    //常用接口
+    //Servlet
+    //ServletRequest
+    //ServletResponse
+    //ServletConfig
+    //ServletContext
+    //GenericServlet 底层实现
+    //ServletInputStream 用来读取二进制数据
+    //ServletOutputStream 用来返回二进制数据
+
+    //Servlet.http的接口
+    //httpServletRequest
+    //HttpServletResponse
+    //HttpSession
+    //HttpServlet
+    //Cookie
+
+    //servlet.annotation
+    //servlet.descriptor
+
     @Override
     public void init() throws ServletException {
         System.out.println("============init=============");
