@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="multiCom-web:war">
-    <output-path>$PROJECT_DIR$/multiCom-web/target</output-path>
-    <root id="archive" name="multiCom-web.war">
-      <element id="artifact" artifact-name="multiCom-web:war exploded" />
-    </root>
-  </artifact>
-</component>

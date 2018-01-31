@@ -1,4 +1,0 @@
-com/multiCom/DAO/UserDAO.class
-com/multiCom/service/CheckUserService.class
-com/multiCom/util/ConnectionFactory.class
-com/multiCom/DAO/impl/UserDAOImpl.class

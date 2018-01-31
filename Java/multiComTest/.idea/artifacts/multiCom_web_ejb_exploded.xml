@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-ejb" name="multiCom-web:ejb exploded">
-    <output-path>$PROJECT_DIR$/classes/artifacts/multiCom_web_ejb_exploded</output-path>
-    <root id="root">
-      <element id="javaee-facet-resources" facet="multiCom-web/ejb/EJB" />
-      <element id="javaee-facet-classes" facet="multiCom-web/ejb/EJB" />
-    </root>
-  </artifact>
-</component>
