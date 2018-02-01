@@ -1,0 +1,25 @@
+<script>
+  //cost[i]=cost[i-2]
+  //if cost[i-1] is robbed cost[i]=Max(cost[i-1])
+  //if cost[i-1] is not robbed cost[i]=(cost[i-1]+cost[i])
+  var rob = function(nums) {
+    const len=nums.length;  
+    if(len==0){
+      return 0;
+    }
+    var cost=new Array(len);
+    //初始化
+    cost[0]=nums[0];
+    cost[1]=Math.max(nums[0],nums[1]);
+
+    if(len>2){
+      for(var i=2;i<len;i++){
+        //如果前一家被偷过，不能偷
+        cost[i]=Math.max(cost[i-2]+nums[i],cost[i-1])
+      }  
+    }
+    return cost[len-1];
+  };
+
+  console.log(rob([1,2,3]));
+</script>

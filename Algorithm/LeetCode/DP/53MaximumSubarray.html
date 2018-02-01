@@ -1,0 +1,27 @@
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+   //cost[i][j]//表示长度为i的数组内，以j开头的子数组的最大和
+   // cost[i][j]=max(cost[i-1][j],cost[i-1][j]+number[i])
+  var maxSubArray = function(nums) {
+      const len=nums.length;
+      //记录上一个最大序列其实到I的所有值的和
+      var sumToI=nums[0];
+      var cost=nums[0]
+      for(var i=1;i<len;i++){
+        sumToI+=nums[i];
+        //如果nums大于一路加过来的和，重新计数
+        if(nums[i]>sumToI){
+          sumToI=nums[i];
+        }
+        cost=Math.max(sumToI,cost)
+      }
+      console.log(cost);
+      return cost;
+  };
+  maxSubArray([-2,1,-3,4,-1,2,1,-5,4])
+  maxSubArray([-1,-2])
+  maxSubArray([8,-19,5,-4,20])
+</script>
