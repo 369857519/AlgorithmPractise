@@ -1,0 +1,18 @@
+<script>
+  /**
+   * @param {number} num
+   * @return {number[]}
+   */
+  var countBits = function(num) {
+    const len=num+1;
+    const cost=new Array(len);
+    cost[0]=0;
+    for(var i=1;i<len;i++){
+      //相当于10进制的10位以上加各位
+      cost[i]=cost[i>>1]+(i&1);
+    }
+    return cost;
+  };
+  console.log(countBits(5));
+
+</script>
